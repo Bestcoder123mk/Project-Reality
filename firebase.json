@@ -1,0 +1,94 @@
+{
+  "hosting": {
+    "source": ".",
+    "site": "project-reality",
+    "ignore": [
+      "firebase.json",
+      "**/.*",
+      "**/node_modules/**",
+      "**/.next/**",
+      "**/tests/**",
+      "**/scripts/**",
+      "**/upload/**",
+      "**/tool-results/**",
+      "**/download/**"
+    ],
+    "frameworksBackend": {
+      "region": "us-central1",
+      "maxInstances": 10
+    },
+    "redirects": [
+      {
+        "source": "/discord",
+        "destination": "https://discord.gg/project-reality",
+        "type": 302
+      },
+      {
+        "source": "/support",
+        "destination": "/api/support/ticket",
+        "type": 302
+      }
+    ],
+    "rewrites": [
+      {
+        "source": "**",
+        "destination": "/index.html"
+      }
+    ],
+    "headers": [
+      {
+        "source": "**/*.@(js|css|woff2|png|jpg|jpeg|gif|svg|webp|avif|wasm)",
+        "headers": [
+          { "key": "Cache-Control", "value": "public, max-age=31536000, immutable" }
+        ]
+      },
+      {
+        "source": "/sw.js",
+        "headers": [
+          { "key": "Cache-Control", "value": "no-cache, no-store, must-revalidate" }
+        ]
+      },
+      {
+        "source": "**",
+        "headers": [
+          { "key": "X-Content-Type-Options", "value": "nosniff" },
+          { "key": "X-Frame-Options", "value": "DENY" },
+          { "key": "Referrer-Policy", "value": "strict-origin-when-cross-origin" },
+          { "key": "Permissions-Policy", "value": "geolocation=(), microphone=(), camera=()" },
+          { "key": "Strict-Transport-Security", "value": "max-age=63072000; includeSubDomains; preload" }
+        ]
+      }
+    ],
+    "cleanUrls": true,
+    "trailingSlash": false,
+    "appAssociation": "AUTO",
+    "public": "public"
+  },
+  "firestore": {
+    "rules": "firestore.rules",
+    "indexes": "firestore.indexes.json"
+  },
+  "storage": {
+    "rules": "storage.rules"
+  },
+  "functions": {
+    "source": "functions",
+    "runtime": "nodejs20",
+    "predeploy": [
+      "npm --prefix \"$RESOURCE_DIR\" run lint",
+      "npm --prefix \"$RESOURCE_DIR\" run build"
+    ]
+  },
+  "emulators": {
+    "auth": { "port": 9099 },
+    "firestore": { "port": 8080 },
+    "functions": { "port": 5001 },
+    "hosting": { "port": 5000 },
+    "storage": { "port": 9199 },
+    "ui": { "enabled": true, "port": 4000 },
+    "singleProjectMode": true
+  },
+  "remoteconfig": {
+    "template": "remote-config.template.json"
+  }
+}

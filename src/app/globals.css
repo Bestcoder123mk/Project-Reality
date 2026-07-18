@@ -1,0 +1,574 @@
+@import "tailwindcss";
+@import "tw-animate-css";
+
+@custom-variant dark (&:is(.dark *));
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --font-sans: var(--font-sans);
+  --font-mono: var(--font-mono);
+  --font-display: var(--font-display);
+  --color-sidebar-ring: var(--sidebar-ring);
+  --color-sidebar-border: var(--sidebar-border);
+  --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
+  --color-sidebar-accent: var(--sidebar-accent);
+  --color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
+  --color-sidebar-primary: var(--sidebar-primary);
+  --color-sidebar-foreground: var(--sidebar-foreground);
+  --color-sidebar: var(--sidebar);
+  --color-chart-5: var(--chart-5);
+  --color-chart-4: var(--chart-4);
+  --color-chart-3: var(--chart-3);
+  --color-chart-2: var(--chart-2);
+  --color-chart-1: var(--chart-1);
+  --color-ring: var(--ring);
+  --color-input: var(--input);
+  --color-border: var(--border);
+  --color-destructive: var(--destructive);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-accent: var(--accent);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-muted: var(--muted);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-secondary: var(--secondary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-primary: var(--primary);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-popover: var(--popover);
+  --color-card-foreground: var(--card-foreground);
+  --color-card: var(--card);
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 4px);
+}
+
+:root {
+  --radius: 0.625rem;
+  --background: oklch(1 0 0);
+  --foreground: oklch(0.145 0 0);
+  --card: oklch(1 0 0);
+  --card-foreground: oklch(0.145 0 0);
+  --popover: oklch(1 0 0);
+  --popover-foreground: oklch(0.145 0 0);
+  --primary: oklch(0.205 0 0);
+  --primary-foreground: oklch(0.985 0 0);
+  --secondary: oklch(0.97 0 0);
+  --secondary-foreground: oklch(0.205 0 0);
+  --muted: oklch(0.97 0 0);
+  --muted-foreground: oklch(0.556 0 0);
+  --accent: oklch(0.97 0 0);
+  --accent-foreground: oklch(0.205 0 0);
+  --destructive: oklch(0.577 0.245 27.325);
+  --border: oklch(0.922 0 0);
+  --input: oklch(0.922 0 0);
+  --ring: oklch(0.708 0 0);
+  --chart-1: oklch(0.646 0.222 41.116);
+  --chart-2: oklch(0.6 0.118 184.704);
+  --chart-3: oklch(0.398 0.07 227.392);
+  --chart-4: oklch(0.828 0.189 84.429);
+  --chart-5: oklch(0.769 0.188 70.08);
+  --sidebar: oklch(0.985 0 0);
+  --sidebar-foreground: oklch(0.145 0 0);
+  --sidebar-primary: oklch(0.205 0 0);
+  --sidebar-primary-foreground: oklch(0.985 0 0);
+  --sidebar-accent: oklch(0.97 0 0);
+  --sidebar-accent-foreground: oklch(0.205 0 0);
+  --sidebar-border: oklch(0.922 0 0);
+  --sidebar-ring: oklch(0.708 0 0);
+  /* Premium accent — amber/gold for the military-tactical aesthetic. */
+  --accent-amber: #ff8c1a;
+  --accent-amber-glow: rgba(255, 140, 26, 0.35);
+  --accent-gold: #d4af37;
+
+  /* V4.1 — Grounded tactical palette (justified against the subject: a
+   *  grounded tactical-operator sim, not a generic SaaS product). 4 named
+   *  base values + one high-contrast accent (amber, already defined above).
+   *  Desaturated olive/gunmetal/tan reads truer to the subject than the
+   *  prior white-on-black-with-everything-translucent treatment. */
+  --tac-charcoal: #08090c;   /* deepest background — hangar floor */
+  --tac-gunmetal: #1a1e16;   /* panel base — steel furniture */
+  --tac-olive: #3b4a2f;      /* primary fabric — operator fatigues */
+  --tac-tan: #c9b08a;        /* warm neutral — sand / webbing / kydex */
+  --tac-steel: #6a7068;      /* cool neutral — metal hardware */
+}
+
+.dark {
+  --background: oklch(0.145 0 0);
+  --foreground: oklch(0.985 0 0);
+  --card: oklch(0.205 0 0);
+  --card-foreground: oklch(0.985 0 0);
+  --popover: oklch(0.205 0 0);
+  --popover-foreground: oklch(0.985 0 0);
+  --primary: oklch(0.922 0 0);
+  --primary-foreground: oklch(0.205 0 0);
+  --secondary: oklch(0.269 0 0);
+  --secondary-foreground: oklch(0.985 0 0);
+  --muted: oklch(0.269 0 0);
+  --muted-foreground: oklch(0.708 0 0);
+  --accent: oklch(0.269 0 0);
+  --accent-foreground: oklch(0.985 0 0);
+  --destructive: oklch(0.704 0.191 22.216);
+  --border: oklch(1 0 0 / 10%);
+  --input: oklch(1 0 0 / 15%);
+  --ring: oklch(0.556 0 0);
+  --chart-1: oklch(0.488 0.243 264.376);
+  --chart-2: oklch(0.696 0.17 162.48);
+  --chart-3: oklch(0.769 0.188 70.08);
+  --chart-4: oklch(0.627 0.265 303.9);
+  --chart-5: oklch(0.645 0.246 16.439);
+  --sidebar: oklch(0.205 0 0);
+  --sidebar-foreground: oklch(0.985 0 0);
+  --sidebar-primary: oklch(0.488 0.243 264.376);
+  --sidebar-primary-foreground: oklch(0.985 0 0);
+  --sidebar-accent: oklch(0.269 0 0);
+  --sidebar-accent-foreground: oklch(0.985 0 0);
+  --sidebar-border: oklch(1 0 0 / 10%);
+  --sidebar-ring: oklch(0.556 0 0);
+}
+
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+  }
+  body {
+    @apply bg-background text-foreground;
+    /* Apple SF Pro → Inter fallback. Variable font for premium weight range. */
+    font-family: var(--font-sans), -apple-system, BlinkMacSystemFont, "SF Pro Display", "Segoe UI", system-ui, sans-serif;
+    font-feature-settings: "cv11", "ss03", "tnum";
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility;
+  }
+  /* Tabular numerics everywhere by default for that premium data-dense feel. */
+  .tabular {
+    font-variant-numeric: tabular-nums;
+    font-feature-settings: "tnum" 1;
+  }
+}
+
+/* ============================================================
+   PREMIUM TRANSLUCENT PANEL SYSTEM
+   Military-tactical glassmorphism with amber accents.
+   ============================================================ */
+@layer utilities {
+  /* HUD blocks (in-game overlay). */
+  .hud-glass {
+    background: rgba(18, 20, 24, 0.55);
+    backdrop-filter: blur(12px) saturate(130%);
+    -webkit-backdrop-filter: blur(12px) saturate(130%);
+    border: 1px solid rgba(255, 255, 255, 0.07);
+    box-shadow:
+      0 4px 16px rgba(0, 0, 0, 0.4),
+      inset 0 1px 0 rgba(255, 255, 255, 0.04);
+  }
+
+  /* V2.4 — Tactical panel: sharp-cornered (0–4px), olive/gunmetal base,
+   *  with corner-notch accents. The distinctive tactical-shooter bracket
+   *  look the master prompt specifies (not rounded-2xl glass). */
+  .tactical-panel {
+    position: relative;
+    background: rgba(20, 24, 18, 0.72);
+    backdrop-filter: blur(10px) saturate(125%);
+    -webkit-backdrop-filter: blur(10px) saturate(125%);
+    border: 1px solid rgba(180, 170, 120, 0.18);
+    border-radius: 2px;
+    box-shadow:
+      0 3px 12px rgba(0, 0, 0, 0.45),
+      inset 0 1px 0 rgba(255, 240, 200, 0.05);
+  }
+  /* Corner-notch accents — cut the corners for that tactical bracket feel. */
+  .tactical-bracket {
+    position: relative;
+    border-radius: 2px;
+  }
+  .tactical-bracket::before,
+  .tactical-bracket::after {
+    content: "";
+    position: absolute;
+    width: 10px;
+    height: 10px;
+    border-color: rgba(255, 140, 26, 0.6);
+    border-style: solid;
+    pointer-events: none;
+  }
+  .tactical-bracket::before {
+    top: -1px; left: -1px;
+    border-width: 1px 0 0 1px;
+  }
+  .tactical-bracket::after {
+    bottom: -1px; right: -1px;
+    border-width: 0 1px 1px 0;
+  }
+  /* Segmented pip bar (damage / ammo / streak). */
+  .pip-bar {
+    display: flex;
+    gap: 2px;
+  }
+  .pip-bar > .pip {
+    flex: 1;
+    height: 4px;
+    background: rgba(255, 255, 255, 0.12);
+    border-radius: 1px;
+    transition: background 120ms linear;
+  }
+  .pip-bar > .pip.on {
+    background: var(--accent-amber);
+    box-shadow: 0 0 4px rgba(255, 140, 26, 0.5);
+  }
+  .pip-bar > .pip.on.low {
+    background: #ef4444;
+    box-shadow: 0 0 4px rgba(239, 68, 68, 0.5);
+  }
+  .hud-glass-strong {
+    background: rgba(12, 14, 18, 0.78);
+    backdrop-filter: blur(16px) saturate(140%);
+    -webkit-backdrop-filter: blur(16px) saturate(140%);
+    border: 1px solid rgba(255, 255, 255, 0.09);
+    box-shadow:
+      0 6px 22px rgba(0, 0, 0, 0.5),
+      inset 0 1px 0 rgba(255, 255, 255, 0.05);
+  }
+  .hud-mono {
+    font-family: var(--font-mono), "SF Mono", "JetBrains Mono", monospace;
+    font-feature-settings: "tnum" 1;
+    font-variant-numeric: tabular-nums;
+    letter-spacing: 0.01em;
+  }
+  .hud-label {
+    text-transform: uppercase;
+    letter-spacing: 0.22em;
+    font-weight: 600;
+    font-size: 9px;
+    color: rgba(255, 255, 255, 0.42);
+  }
+
+  /* MENU panels — heavier, more premium translucency. */
+  .panel-glass {
+    background: rgba(16, 17, 21, 0.62);
+    backdrop-filter: blur(24px) saturate(140%);
+    -webkit-backdrop-filter: blur(24px) saturate(140%);
+    border: 1px solid rgba(255, 255, 255, 0.06);
+    box-shadow:
+      0 8px 32px rgba(0, 0, 0, 0.5),
+      inset 0 1px 0 rgba(255, 255, 255, 0.04);
+  }
+  .panel-glass-strong {
+    background: rgba(10, 11, 14, 0.82);
+    backdrop-filter: blur(32px) saturate(150%);
+    -webkit-backdrop-filter: blur(32px) saturate(150%);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    box-shadow:
+      0 12px 48px rgba(0, 0, 0, 0.6),
+      inset 0 1px 0 rgba(255, 255, 255, 0.05);
+  }
+  /* Hairline border utility for that Apple-grade precision. */
+  .hairline {
+    border: 1px solid rgba(255, 255, 255, 0.06);
+  }
+  .hairline-b {
+    border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+  }
+  .hairline-t {
+    border-top: 1px solid rgba(255, 255, 255, 0.06);
+  }
+  .hairline-r {
+    border-right: 1px solid rgba(255, 255, 255, 0.06);
+  }
+  .hairline-l {
+    border-left: 1px solid rgba(255, 255, 255, 0.06);
+  }
+
+  /* Amber accent utilities — the single system accent color. */
+  .text-amber-accent { color: var(--accent-amber); }
+  .text-gold-accent { color: var(--accent-gold); }
+  .bg-amber-accent { background-color: var(--accent-amber); }
+  .border-amber-accent { border-color: var(--accent-amber); }
+  .ring-amber-accent { --tw-ring-color: var(--accent-amber); }
+  .glow-amber {
+    box-shadow:
+      0 0 24px var(--accent-amber-glow),
+      0 0 48px rgba(255, 140, 26, 0.15);
+  }
+  .glow-amber-sm {
+    box-shadow: 0 0 12px var(--accent-amber-glow);
+  }
+  /* Gradient text for hero numbers / callsigns. */
+  .text-gradient-amber {
+    background: linear-gradient(135deg, #ffb04a 0%, #ff8c1a 50%, #d4af37 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+  .text-gradient-white {
+    background: linear-gradient(180deg, #ffffff 0%, rgba(255, 255, 255, 0.55) 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+
+  /* V4.1 — Display face (Oswald condensed) for the tactical wordmark +
+   *  headlines. Strong tracking + heavy weight reads as "operator sim,"
+   *  not generic SaaS. Shared across menu + HUD for one identity. */
+  .font-display {
+    font-family: var(--font-display), "Oswald", "Bebas Neue", "Inter", sans-serif;
+    font-weight: 700;
+    letter-spacing: 0.02em;
+  }
+  .font-display-tight {
+    font-family: var(--font-display), "Oswald", "Bebas Neue", "Inter", sans-serif;
+    font-weight: 600;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+  }
+  /* Wordmark treatment — condensed, wide-tracked, with a subtle tan→amber
+   * metallic gradient that reads as engraved metal, not a CSS demo. */
+  .text-wordmark {
+    font-family: var(--font-display), "Oswald", sans-serif;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    background: linear-gradient(180deg, #e8d9b8 0%, #c9b08a 45%, #8a7a5a 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    text-shadow: 0 1px 0 rgba(0, 0, 0, 0.6);
+  }
+
+  /* Apple-style focus ring: 2px amber at 50% opacity, 4px offset. */
+  .focus-ring {
+    outline: none;
+  }
+  .focus-ring:focus-visible {
+    outline: 2px solid rgba(255, 140, 26, 0.5);
+    outline-offset: 4px;
+    border-radius: 4px;
+  }
+
+  /* Noise texture overlay — adds grit without heavy images. */
+  .noise-overlay {
+    position: relative;
+  }
+  .noise-overlay::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    opacity: 0.025;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='3' /%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  }
+
+  /* Slim custom scrollbar. */
+  .scroll-thin {
+    scrollbar-width: thin;
+    scrollbar-color: rgba(255, 255, 255, 0.15) transparent;
+  }
+  .scroll-thin::-webkit-scrollbar { width: 5px; height: 5px; }
+  .scroll-thin::-webkit-scrollbar-thumb {
+    background: rgba(255, 255, 255, 0.15);
+    border-radius: 3px;
+  }
+  .scroll-thin::-webkit-scrollbar-track { background: transparent; }
+  .scroll-hidden::-webkit-scrollbar { display: none; }
+  .scroll-hidden { scrollbar-width: none; }
+
+  /* Conic gradient sweep used by ability cooldown overlays. */
+  .hud-cooldown-mask {
+    -webkit-mask: radial-gradient(circle, transparent 55%, black 56%);
+    mask: radial-gradient(circle, transparent 55%, black 56%);
+  }
+
+  /* Premium button shimmer sweep (used on Deploy CTA). */
+  .shimmer-sweep {
+    background: linear-gradient(
+      110deg,
+      transparent 30%,
+      rgba(255, 255, 255, 0.12) 50%,
+      transparent 70%
+    );
+    background-size: 200% 100%;
+    animation: shimmer 2.5s linear infinite;
+  }
+  @keyframes shimmer {
+    0% { background-position: 200% 0; }
+    100% { background-position: -200% 0; }
+  }
+}
+
+/* ============================================================
+   prefers-reduced-motion — disable springs, auto-rotate, shimmer.
+   Springs and auto-rotate fall back to instant/minimal motion.
+   ============================================================ */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+  .shimmer-sweep { animation: none !important; }
+}
+
+/* ============================================================
+   Prompt I-977 — Reduced motion mode (explicit opt-in).
+   The OS-level `prefers-reduced-motion` above is the floor. The
+   settings panel exposes a per-player `reducedMotion` flag (in
+   VisualSettings) that the SettingsPanel writes to <html
+   data-reduced-motion="true">. This selector lets players who
+   want reduced motion WITHOUT changing their OS setting opt in.
+   It mirrors the same effect as `prefers-reduced-motion: reduce`.
+   ============================================================ */
+[data-reduced-motion="true"] *,
+[data-reduced-motion="true"] *::before,
+[data-reduced-motion="true"] *::after {
+  animation-duration: 0.01ms !important;
+  animation-iteration-count: 1 !important;
+  transition-duration: 0.01ms !important;
+  scroll-behavior: auto !important;
+}
+[data-reduced-motion="true"] .shimmer-sweep { animation: none !important; }
+
+/* ============================================================
+   Prompt I-988 — Mobile UI safe-area (notch / dynamic island).
+   Surfaces the env(safe-area-inset-*) values to the HUD/menu shell
+   via CSS custom properties so components can pad themselves away
+   from notches, punch-holes, and the home indicator. The HUD root
+   + the MainMenu header/footer read these via Tailwind arbitrary
+   values like `pt-[env(safe-area-inset-top)]`.
+   ============================================================ */
+:root {
+  --safe-area-top: env(safe-area-inset-top, 0px);
+  --safe-area-bottom: env(safe-area-inset-bottom, 0px);
+  --safe-area-left: env(safe-area-inset-left, 0px);
+  --safe-area-right: env(safe-area-inset-right, 0px);
+}
+.safe-area-pt { padding-top: var(--safe-area-top); }
+.safe-area-pb { padding-bottom: var(--safe-area-bottom); }
+.safe-area-pl { padding-left: var(--safe-area-left); }
+.safe-area-pr { padding-right: var(--safe-area-right); }
+.safe-area-p {
+  padding-top: var(--safe-area-top);
+  padding-bottom: var(--safe-area-bottom);
+  padding-left: var(--safe-area-left);
+  padding-right: var(--safe-area-right);
+}
+
+/* ============================================================
+   Prompt I-976 — Screen-reader-only utility.
+   Visually hides content but keeps it available to screen readers
+   (the canonical .sr-only recipe). Used by the menu's aria-live
+   region + by hidden labels that supplement icon-only buttons.
+   ============================================================ */
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+/* ============================================================
+   Prompt J-4057 / J-4105 — Dyslexia-friendly font toggle.
+   When `data-dyslexia-font="true"` is set on <html>, body text + HUD
+   labels swap to a dyslexia-friendly font stack. We don't bundle
+   OpenDyslexic (license + weight); instead we use a system stack
+   that prioritizes fonts with ascender/descender differentiation +
+   letter-spacing tuned for dyslexic readers. The player can also
+   install OpenDyslexic locally + the `--font-dyslexia` custom
+   property lets a future iteration swap it in without CSS changes.
+   ============================================================ */
+:root {
+  --font-dyslexia: "Comic Sans MS", "Trebuchet MS", "Verdana", system-ui, sans-serif;
+}
+[data-dyslexia-font="true"] body,
+[data-dyslexia-font="true"] .hud-label,
+[data-dyslexia-font="true"] .hud-mono,
+[data-dyslexia-font="true"] .font-display,
+[data-dyslexia-font="true"] .font-display-tight,
+[data-dyslexia-font="true"] .font-sans {
+  font-family: var(--font-dyslexia) !important;
+  letter-spacing: 0.04em !important;
+  word-spacing: 0.12em !important;
+  line-height: 1.55 !important;
+}
+
+/* ============================================================
+   Prompt J-4059 / J-4106 / J-4185 — RTL layout.
+   The `dir="rtl"` attribute is set on <html> by applyTextDirection()
+   in i18n.ts. We use CSS logical properties (margin-inline-start,
+   padding-inline-end, etc.) so the layout mirrors automatically.
+   The rules below fix the few places that use physical left/right
+   for HUD clusters — they flip to the opposite side under RTL.
+   ============================================================ */
+[dir="rtl"] .absolute.left-4 { left: auto; right: 1rem; }
+[dir="rtl"] .absolute.right-4 { right: auto; left: 1rem; }
+[dir="rtl"] .absolute.left-1\/2 { left: 50%; } /* keep centered elements centered */
+/* Mirror the radial damage indicator (it's already direction-agnostic). */
+[dir="rtl"] .hud-glass { /* logical-property safe */ }
+
+/* ============================================================
+   Prompt J-4019 / J-4095 / J-4185 — 21:9 / ultrawide HUD scaling.
+   On ultrawide displays (aspect ratio >= 21/9), the HUD clusters
+   are pinned to screen edges that can be ~600px from the player's
+   focal point. This rule scales the HUD clusters up + adds inner
+   padding so they remain readable without straddling the entire
+   width. The `--hud-scale` custom property lets the SettingsPanel
+   expose a manual HUD-scale slider that overrides the auto value.
+   ============================================================ */
+:root {
+  --hud-scale: 1;
+}
+@media (min-aspect-ratio: 21/9) {
+  :root {
+    --hud-scale: 1.12;
+  }
+}
+@media (min-aspect-ratio: 32/9) {
+  :root {
+    --hud-scale: 1.25;
+  }
+}
+.hud-glass {
+  transform: scale(var(--hud-scale));
+  transform-origin: var(--hud-origin, center);
+}
+
+/* ============================================================
+   Prompt J-4018 / J-4094 / J-4184 — HDR UI hints.
+   Browsers expose `color-gamut: rec2100` (HDR / wide-gamut displays).
+   We boost the UI's primary accents so they take advantage of the
+   wider gamut — the amber brand color becomes more saturated, the
+   damage red becomes deeper. The values stay within sRGB fallback
+   (regular displays see no change). A future iteration could load
+   HDR-specific LUTs for the canvas; this rule covers the UI layer.
+   ============================================================ */
+@media (color-gamut: rec2100) {
+  :root {
+    --hdr-amber: color(display-p3 1 0.62 0.18);
+    --hdr-red: color(display-p3 0.92 0.18 0.22);
+    --hdr-emerald: color(display-p3 0.10 0.84 0.50);
+  }
+  .text-amber-400 { color: var(--hdr-amber); }
+  .text-rose-400 { color: var(--hdr-red); }
+  .text-emerald-400 { color: var(--hdr-emerald); }
+}
+
+/* ============================================================
+   Prompt J-4020 / J-4097 / J-4186 — safe-area / notch handling.
+   (The base safe-area utilities live above; this block adds the
+   HUD-specific application. The HUD root reads these via Tailwind
+   arbitrary values like `pt-[env(safe-area-inset-top)]`.)
+   ============================================================ */
+.hud-root {
+  padding-top: env(safe-area-inset-top);
+  padding-bottom: env(safe-area-inset-bottom);
+  padding-left: env(safe-area-inset-left);
+  padding-right: env(safe-area-inset-right);
+}

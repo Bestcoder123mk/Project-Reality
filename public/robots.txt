@@ -1,0 +1,24 @@
+# Project Reality — robots.txt
+# Task-1 (SEC) item 20: admin routes are not indexable.
+
+User-agent: Googlebot
+Allow: /
+
+User-agent: Bingbot
+Allow: /
+
+User-agent: Twitterbot
+Allow: /
+
+User-agent: facebookexternalhit
+Allow: /
+
+# Block every crawler from the admin API surface.
+User-agent: *
+Disallow: /api/admin/
+Disallow: /api/player/delete
+Disallow: /api/player/data-export
+Disallow: /api/telemetry/
+
+# Public API + pages are fine to crawl.
+Allow: /

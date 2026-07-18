@@ -1,0 +1,81 @@
+{
+  "version": "1",
+  "parameters": {
+    "enable_cloud_save": {
+      "defaultValue": "true",
+      "description": "Master switch for cloud save (Firestore sync)."
+    },
+    "enable_google_signin": {
+      "defaultValue": "true",
+      "description": "Master switch for the Google Sign-in button."
+    },
+    "enable_clans": {
+      "defaultValue": "false",
+      "description": "Show the clans panel in the menu."
+    },
+    "enable_matchmaking": {
+      "defaultValue": "false",
+      "description": "Enable live multiplayer matchmaking (requires Cloud Functions)."
+    },
+    "enable_leaderboard": {
+      "defaultValue": "false",
+      "description": "Show the leaderboard tab."
+    },
+    "enable_packs": {
+      "defaultValue": "true",
+      "description": "Show the packs shop."
+    },
+    "enable_shop": {
+      "defaultValue": "true",
+      "description": "Show the armory shop."
+    },
+    "enable_battlepass": {
+      "defaultValue": "true",
+      "description": "Show the battle pass screen."
+    },
+    "enable_gunsmith": {
+      "defaultValue": "true",
+      "description": "Show the gunsmith screen."
+    },
+    "daily_bonus_credits": {
+      "defaultValue": "100",
+      "description": "Credits awarded for the daily bonus."
+    },
+    "weekly_bonus_credits": {
+      "defaultValue": "500",
+      "description": "Credits awarded for the weekly bonus."
+    },
+    "battlepass_tier_size": {
+      "defaultValue": "1000",
+      "description": "XP required per battle pass tier."
+    },
+    "battlepass_max_tier": {
+      "defaultValue": "50",
+      "description": "Maximum battle pass tier for the current season."
+    },
+    "ab_new_hud_layout": {
+      "defaultValue": "0",
+      "description": "A/B test: percent of players in cohort B (new HUD layout)."
+    },
+    "ab_tactical_sprint": {
+      "defaultValue": "0",
+      "description": "A/B test: percent of players in cohort B (tactical sprint)."
+    },
+    "ab_recoil_rework": {
+      "defaultValue": "0",
+      "description": "A/B test: percent of players in cohort B (recoil rework)."
+    },
+    "maintenance_mode": {
+      "defaultValue": "false",
+      "description": "When true, the game shows a maintenance screen."
+    },
+    "maintenance_message": {
+      "defaultValue": "",
+      "description": "Message shown on the maintenance screen."
+    },
+    "min_client_version": {
+      "defaultValue": "0.0.0",
+      "description": "Minimum client version allowed to connect (semver)."
+    }
+  }
+}

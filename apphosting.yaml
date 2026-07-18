@@ -1,0 +1,57 @@
+# App Hosting backend configuration for Project Reality.
+#
+# Section I (Firebase & Backend) — custom domain hosting.
+#
+# App Hosting is Firebase's managed Next.js backend (replaces Cloud
+# Functions for SSR). This YAML configures the build, environment
+# variables, and the Cloud Run service that backs the deployment.
+#
+# Deploy:
+#   firebase apphosting:backends:create --backend project-reality
+#   firebase apphosting:build:apply --backend project-reality
+#
+# Custom domain:
+#   firebase apphosting:domains:create project-reality.example.com \
+#     --backend project-reality
+#
+# Then point the domain's DNS A/AAAA records at the IPs the CLI
+# returns. Firebase provisions the TLS certificate automatically.
+
+runConfig:
+  # Auto-scale: keep at least 1 instance warm for low-latency first
+  # paint; cap at 10 instances to bound cost.
+  minInstances: 1
+  maxInstances: 10
+  concurrency: 80
+  cpu: 1
+  memoryMiB: 1024
+  # 60s timeout — long enough for the initial SSR render of the heavy
+  # Three.js menu page; short enough to fail fast on a stuck build.
+  timeoutSeconds: 60
+environmentVariables:
+  # Public Firebase config (also in src/lib/firebase.ts — kept here for
+  # server-side route handlers that need to mint custom tokens).
+  - variable: NEXT_PUBLIC_FIREBASE_API_KEY
+    value: "AIzaSyBVBoK6r0_yFF1kz97dpSM6WG0h2Cc5o24"
+  - variable: NEXT_PUBLIC_FIREBASE_AUTH_DOMAIN
+    value: "project-reality-8966a.firebaseapp.com"
+  - variable: NEXT_PUBLIC_FIREBASE_PROJECT_ID
+    value: "project-reality-8966a"
+  - variable: NEXT_PUBLIC_FIREBASE_STORAGE_BUCKET
+    value: "project-reality-8966a.firebasestorage.app"
+  - variable: NEXT_PUBLIC_FIREBASE_MESSAGING_SENDER_ID
+    value: "365854703769"
+  - variable: NEXT_PUBLIC_FIREBASE_APP_ID
+    value: "1:365854703769:web:9ab0db290d8ea7c8087808"
+  - variable: NEXT_PUBLIC_FIREBASE_MEASUREMENT_ID
+    value: "G-B7E62D6W33"
+  # reCAPTCHA Enterprise site key for App Check. Replace with the real
+  # site key once registered in the Firebase console.
+  - variable: NEXT_PUBLIC_RECAPTCHA_ENTERPRISE_SITE_KEY
+    value: ""
+  # Database (server-only — the secret is injected by the platform's
+  # secret manager, not committed).
+  - variable: DATABASE_URL
+    secret: projects/365854703769/secrets/database-url
+  - variable: ADMIN_SECRET
+    secret: projects/365854703769/secrets/admin-secret

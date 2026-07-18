@@ -1,0 +1,4870 @@
+// Bun Snapshot v1, https://bun.sh/docs/test/snapshots
+
+exports[`MapValidator snapshots (one per registered map) compound: matches committed snapshot 1`] = `
+{
+  "boundary": {
+    "ok": false,
+    "outOfBoundsProps": [
+      {
+        "position": [
+          0,
+          4,
+          -45,
+        ],
+        "type": "box",
+      },
+      {
+        "position": [
+          0,
+          4,
+          45,
+        ],
+        "type": "box",
+      },
+      {
+        "position": [
+          -45,
+          4,
+          0,
+        ],
+        "type": "box",
+      },
+      {
+        "position": [
+          45,
+          4,
+          0,
+        ],
+        "type": "box",
+      },
+    ],
+    "outOfBoundsSpawns": [],
+  },
+  "bounds": 45,
+  "coverDensity": [
+    {
+      "count": 5,
+      "max": 20,
+      "min": 3,
+      "ok": true,
+      "verdict": "ok",
+      "zone": "NW",
+    },
+    {
+      "count": 10,
+      "max": 20,
+      "min": 3,
+      "ok": true,
+      "verdict": "ok",
+      "zone": "W",
+    },
+    {
+      "count": 4,
+      "max": 20,
+      "min": 3,
+      "ok": true,
+      "verdict": "ok",
+      "zone": "SW",
+    },
+    {
+      "count": 4,
+      "max": 20,
+      "min": 3,
+      "ok": true,
+      "verdict": "ok",
+      "zone": "N",
+    },
+    {
+      "count": 15,
+      "max": 20,
+      "min": 3,
+      "ok": true,
+      "verdict": "ok",
+      "zone": "C",
+    },
+    {
+      "count": 3,
+      "max": 20,
+      "min": 3,
+      "ok": true,
+      "verdict": "ok",
+      "zone": "S",
+    },
+    {
+      "count": 4,
+      "max": 20,
+      "min": 3,
+      "ok": true,
+      "verdict": "ok",
+      "zone": "NE",
+    },
+    {
+      "count": 9,
+      "max": 20,
+      "min": 3,
+      "ok": true,
+      "verdict": "ok",
+      "zone": "E",
+    },
+    {
+      "count": 10,
+      "max": 20,
+      "min": 3,
+      "ok": true,
+      "verdict": "ok",
+      "zone": "SE",
+    },
+  ],
+  "issues": [
+    "Spawn -38,0,-38 is inside the spawn-camp hard floor (3.0m < 8m) — obstruction is not a reliable defense.",
+    "Spawn -38,0,-38 has clear LOS to a common player position (3.0m away).",
+    "Spawn 0,0,-40 is inside the spawn-camp hard floor (5.1m < 8m) — obstruction is not a reliable defense.",
+    "Spawn 0,0,-40 has clear LOS to a common player position (5.1m away).",
+    "Spawn 0,0,40 is inside the spawn-camp hard floor (5.1m < 8m) — obstruction is not a reliable defense.",
+    "Spawn 0,0,40 has clear LOS to a common player position (5.1m away).",
+    "Spawn -40,0,0 is inside the spawn-camp hard floor (5.1m < 8m) — obstruction is not a reliable defense.",
+    "Spawn -40,0,0 has clear LOS to a common player position (5.1m away).",
+    "Spawn 40,0,0 is inside the spawn-camp hard floor (5.1m < 8m) — obstruction is not a reliable defense.",
+    "Spawn 40,0,0 has clear LOS to a common player position (5.1m away).",
+    "Boundary: 0 OOB spawns, 4 OOB props (outside ±43m).",
+  ],
+  "navmesh": {
+    "gaps": [],
+    "ok": true,
+    "reachableCells": 419,
+    "totalCells": 529,
+  },
+  "objectiveZones": [
+    {
+      "mode": "SURVIVAL",
+      "positions": [
+        [
+          0,
+          0,
+          0,
+        ],
+      ],
+      "radius": 45,
+      "type": "survival_arena",
+    },
+    {
+      "mode": "HORDE",
+      "positions": [
+        [
+          0,
+          0,
+          0,
+        ],
+      ],
+      "radius": 18,
+      "type": "horde_rally",
+    },
+    {
+      "mode": "BREACH",
+      "positions": [
+        [
+          -25,
+          0,
+          -25,
+        ],
+        [
+          25,
+          0,
+          -25,
+        ],
+        [
+          -25,
+          0,
+          25,
+        ],
+        [
+          25,
+          0,
+          25,
+        ],
+        [
+          0,
+          0,
+          0,
+        ],
+      ],
+      "type": "breach_rooms",
+    },
+    {
+      "mode": "ZOMBIES",
+      "positions": [
+        [
+          0,
+          0,
+          0,
+        ],
+      ],
+      "radius": 18,
+      "type": "zombies_rally",
+    },
+  ],
+  "ok": false,
+  "respawnZones": [
+    {
+      "spawn": [
+        -38,
+        0,
+        -38,
+      ],
+      "stuck": false,
+    },
+    {
+      "spawn": [
+        38,
+        0,
+        -38,
+      ],
+      "stuck": false,
+    },
+    {
+      "spawn": [
+        -38,
+        0,
+        38,
+      ],
+      "stuck": false,
+    },
+    {
+      "spawn": [
+        38,
+        0,
+        38,
+      ],
+      "stuck": false,
+    },
+    {
+      "spawn": [
+        0,
+        0,
+        -40,
+      ],
+      "stuck": false,
+    },
+    {
+      "spawn": [
+        0,
+        0,
+        40,
+      ],
+      "stuck": false,
+    },
+    {
+      "spawn": [
+        -20,
+        0,
+        -30,
+      ],
+      "stuck": false,
+    },
+    {
+      "spawn": [
+        20,
+        0,
+        -30,
+      ],
+      "stuck": false,
+    },
+    {
+      "spawn": [
+        -20,
+        0,
+        30,
+      ],
+      "stuck": false,
+    },
+    {
+      "spawn": [
+        20,
+        0,
+        30,
+      ],
+      "stuck": false,
+    },
+    {
+      "spawn": [
+        -40,
+        0,
+        0,
+      ],
+      "stuck": false,
+    },
+    {
+      "spawn": [
+        40,
+        0,
+        0,
+      ],
+      "stuck": false,
+    },
+    {
+      "spawn": [
+        0,
+        0,
+        -20,
+      ],
+      "stuck": false,
+    },
+  ],
+  "sightlineLength": {
+    "bucketEdges": [
+      13.5,
+      27,
+      40.5,
+      54,
+      67.5,
+      81,
+      94.5,
+      108,
+    ],
+    "distribution": [
+      161,
+      306,
+      407,
+      222,
+      137,
+      41,
+      6,
+      0,
+    ],
+    "max": 93.94147114027967,
+    "mean": 33.9590663966226,
+    "median": 32.31098884280702,
+    "min": 3,
+    "samples": 1280,
+  },
+  "slug": "compound",
+  "spawnSafety": [
+    {
+      "nearestPlayerDist": 3,
+      "obstructed": false,
+      "reason": "UNSAFE: clear LOS to a common player position within spawn-camp range",
+      "safe": false,
+      "spawn": [
+        -38,
+        0,
+        -38,
+      ],
+    },
+    {
+      "nearestPlayerDist": 38.65229618017538,
+      "obstructed": false,
+      "reason": "far from common player positions",
+      "safe": true,
+      "spawn": [
+        38,
+        0,
+        -38,
+      ],
+    },
+    {
+      "nearestPlayerDist": 38.65229618017538,
+      "obstructed": false,
+      "reason": "far from common player positions",
+      "safe": true,
+      "spawn": [
+        -38,
+        0,
+        38,
+      ],
+    },
+    {
+      "nearestPlayerDist": 38.65229618017538,
+      "obstructed": false,
+      "reason": "far from common player positions",
+      "safe": true,
+      "spawn": [
+        38,
+        0,
+        38,
+      ],
+    },
+    {
+      "nearestPlayerDist": 5.0990195135927845,
+      "obstructed": false,
+      "reason": "UNSAFE: clear LOS to a common player position within spawn-camp range",
+      "safe": false,
+      "spawn": [
+        0,
+        0,
+        -40,
+      ],
+    },
+    {
+      "nearestPlayerDist": 5.0990195135927845,
+      "obstructed": false,
+      "reason": "UNSAFE: clear LOS to a common player position within spawn-camp range",
+      "safe": false,
+      "spawn": [
+        0,
+        0,
+        40,
+      ],
+    },
+    {
+      "nearestPlayerDist": 22.38302928559939,
+      "obstructed": false,
+      "reason": "outside spawn-camp distance",
+      "safe": true,
+      "spawn": [
+        -20,
+        0,
+        -30,
+      ],
+    },
+    {
+      "nearestPlayerDist": 25.019992006393608,
+      "obstructed": false,
+      "reason": "outside spawn-camp distance",
+      "safe": true,
+      "spawn": [
+        20,
+        0,
+        -30,
+      ],
+    },
+    {
+      "nearestPlayerDist": 23.479565583715555,
+      "obstructed": false,
+      "reason": "outside spawn-camp distance",
+      "safe": true,
+      "spawn": [
+        -20,
+        0,
+        30,
+      ],
+    },
+    {
+      "nearestPlayerDist": 23.479565583715555,
+      "obstructed": false,
+      "reason": "outside spawn-camp distance",
+      "safe": true,
+      "spawn": [
+        20,
+        0,
+        30,
+      ],
+    },
+    {
+      "nearestPlayerDist": 5.0990195135927845,
+      "obstructed": false,
+      "reason": "UNSAFE: clear LOS to a common player position within spawn-camp range",
+      "safe": false,
+      "spawn": [
+        -40,
+        0,
+        0,
+      ],
+    },
+    {
+      "nearestPlayerDist": 5.0990195135927845,
+      "obstructed": false,
+      "reason": "UNSAFE: clear LOS to a common player position within spawn-camp range",
+      "safe": false,
+      "spawn": [
+        40,
+        0,
+        0,
+      ],
+    },
+    {
+      "nearestPlayerDist": 25.019992006393608,
+      "obstructed": false,
+      "reason": "outside spawn-camp distance",
+      "safe": true,
+      "spawn": [
+        0,
+        0,
+        -20,
+      ],
+    },
+  ],
+  "totalCover": 66,
+  "verticality": {
+    "isMultiLevel": true,
+    "levels": [
+      4,
+      8,
+      12,
+    ],
+    "verticalPropCount": 18,
+  },
+}
+`;
+
+exports[`MapValidator snapshots (one per registered map) warehouse: matches committed snapshot 1`] = `
+{
+  "boundary": {
+    "ok": false,
+    "outOfBoundsProps": [
+      {
+        "position": [
+          0,
+          5,
+          -35,
+        ],
+        "type": "box",
+      },
+      {
+        "position": [
+          0,
+          5,
+          35,
+        ],
+        "type": "box",
+      },
+      {
+        "position": [
+          -35,
+          5,
+          0,
+        ],
+        "type": "box",
+      },
+      {
+        "position": [
+          35,
+          5,
+          0,
+        ],
+        "type": "box",
+      },
+    ],
+    "outOfBoundsSpawns": [],
+  },
+  "bounds": 35,
+  "coverDensity": [
+    {
+      "count": 1,
+      "max": 20,
+      "min": 3,
+      "ok": false,
+      "verdict": "sparse",
+      "zone": "NW",
+    },
+    {
+      "count": 6,
+      "max": 20,
+      "min": 3,
+      "ok": true,
+      "verdict": "ok",
+      "zone": "W",
+    },
+    {
+      "count": 8,
+      "max": 20,
+      "min": 3,
+      "ok": true,
+      "verdict": "ok",
+      "zone": "SW",
+    },
+    {
+      "count": 7,
+      "max": 20,
+      "min": 3,
+      "ok": true,
+      "verdict": "ok",
+      "zone": "N",
+    },
+    {
+      "count": 8,
+      "max": 20,
+      "min": 3,
+      "ok": true,
+      "verdict": "ok",
+      "zone": "C",
+    },
+    {
+      "count": 5,
+      "max": 20,
+      "min": 3,
+      "ok": true,
+      "verdict": "ok",
+      "zone": "S",
+    },
+    {
+      "count": 7,
+      "max": 20,
+      "min": 3,
+      "ok": true,
+      "verdict": "ok",
+      "zone": "NE",
+    },
+    {
+      "count": 5,
+      "max": 20,
+      "min": 3,
+      "ok": true,
+      "verdict": "ok",
+      "zone": "E",
+    },
+    {
+      "count": 2,
+      "max": 20,
+      "min": 3,
+      "ok": false,
+      "verdict": "sparse",
+      "zone": "SE",
+    },
+  ],
+  "issues": [
+    "Spawn -25,0,-25 has clear LOS to a common player position (9.9m away).",
+    "Spawn 0,0,-30 is inside the spawn-camp hard floor (5.1m < 8m) — obstruction is not a reliable defense.",
+    "Spawn 0,0,-30 has clear LOS to a common player position (5.1m away).",
+    "Spawn -20,0,-10 has clear LOS to a common player position (8.3m away).",
+    "Zone NW cover count 1 is sparse (target 3..20).",
+    "Zone SE cover count 2 is sparse (target 3..20).",
+    "Boundary: 0 OOB spawns, 4 OOB props (outside ±33m).",
+  ],
+  "navmesh": {
+    "gaps": [],
+    "ok": true,
+    "reachableCells": 278,
+    "totalCells": 324,
+  },
+  "objectiveZones": [
+    {
+      "mode": "BREACH",
+      "positions": [
+        [
+          -25,
+          0,
+          -25,
+        ],
+        [
+          25,
+          0,
+          -25,
+        ],
+        [
+          -25,
+          0,
+          25,
+        ],
+        [
+          25,
+          0,
+          25,
+        ],
+        [
+          0,
+          0,
+          0,
+        ],
+      ],
+      "type": "breach_rooms",
+    },
+    {
+      "mode": "SURVIVAL",
+      "positions": [
+        [
+          0,
+          0,
+          0,
+        ],
+      ],
+      "radius": 35,
+      "type": "survival_arena",
+    },
+    {
+      "mode": "VIP",
+      "positions": [
+        [
+          0,
+          0,
+          12,
+        ],
+        [
+          -15,
+          0,
+          0,
+        ],
+        [
+          0,
+          0,
+          -12,
+        ],
+        [
+          15,
+          0,
+          0,
+        ],
+      ],
+      "type": "vip_waypoints",
+    },
+  ],
+  "ok": false,
+  "respawnZones": [
+    {
+      "spawn": [
+        -25,
+        0,
+        -25,
+      ],
+      "stuck": false,
+    },
+    {
+      "spawn": [
+        25,
+        0,
+        -25,
+      ],
+      "stuck": false,
+    },
+    {
+      "spawn": [
+        0,
+        0,
+        -30,
+      ],
+      "stuck": false,
+    },
+    {
+      "spawn": [
+        -20,
+        0,
+        -10,
+      ],
+      "stuck": false,
+    },
+    {
+      "spawn": [
+        20,
+        0,
+        -10,
+      ],
+      "stuck": false,
+    },
+  ],
+  "sightlineLength": {
+    "bucketEdges": [
+      10.5,
+      21,
+      31.5,
+      42,
+      52.5,
+      63,
+      73.5,
+      84,
+    ],
+    "distribution": [
+      66,
+      213,
+      275,
+      248,
+      193,
+      129,
+      20,
+      2,
+    ],
+    "max": 73.7563556583431,
+    "mean": 33.266321363812125,
+    "median": 32.14031735997639,
+    "min": 3,
+    "samples": 1146,
+  },
+  "slug": "warehouse",
+  "spawnSafety": [
+    {
+      "nearestPlayerDist": 9.9498743710662,
+      "obstructed": false,
+      "reason": "UNSAFE: clear LOS to a common player position within spawn-camp range",
+      "safe": false,
+      "spawn": [
+        -25,
+        0,
+        -25,
+      ],
+    },
+    {
+      "nearestPlayerDist": 26.94438717061496,
+      "obstructed": true,
+      "reason": "obstructed by cover between spawn and player",
+      "safe": true,
+      "spawn": [
+        25,
+        0,
+        -25,
+      ],
+    },
+    {
+      "nearestPlayerDist": 5.0990195135927845,
+      "obstructed": false,
+      "reason": "UNSAFE: clear LOS to a common player position within spawn-camp range",
+      "safe": false,
+      "spawn": [
+        0,
+        0,
+        -30,
+      ],
+    },
+    {
+      "nearestPlayerDist": 8.306623862918075,
+      "obstructed": false,
+      "reason": "UNSAFE: clear LOS to a common player position within spawn-camp range",
+      "safe": false,
+      "spawn": [
+        -20,
+        0,
+        -10,
+      ],
+    },
+    {
+      "nearestPlayerDist": 18.05547008526779,
+      "obstructed": false,
+      "reason": "outside spawn-camp distance",
+      "safe": true,
+      "spawn": [
+        20,
+        0,
+        -10,
+      ],
+    },
+  ],
+  "totalCover": 51,
+  "verticality": {
+    "isMultiLevel": true,
+    "levels": [
+      4,
+      10,
+    ],
+    "verticalPropCount": 10,
+  },
+}
+`;
+
+exports[`MapValidator snapshots (one per registered map) rooftops: matches committed snapshot 1`] = `
+{
+  "boundary": {
+    "ok": false,
+    "outOfBoundsProps": [
+      {
+        "position": [
+          0,
+          1,
+          -40,
+        ],
+        "type": "box",
+      },
+      {
+        "position": [
+          0,
+          1,
+          40,
+        ],
+        "type": "box",
+      },
+      {
+        "position": [
+          -40,
+          1,
+          0,
+        ],
+        "type": "box",
+      },
+      {
+        "position": [
+          40,
+          1,
+          0,
+        ],
+        "type": "box",
+      },
+    ],
+    "outOfBoundsSpawns": [],
+  },
+  "bounds": 40,
+  "coverDensity": [
+    {
+      "count": 3,
+      "max": 20,
+      "min": 3,
+      "ok": true,
+      "verdict": "ok",
+      "zone": "NW",
+    },
+    {
+      "count": 7,
+      "max": 20,
+      "min": 3,
+      "ok": true,
+      "verdict": "ok",
+      "zone": "W",
+    },
+    {
+      "count": 1,
+      "max": 20,
+      "min": 3,
+      "ok": false,
+      "verdict": "sparse",
+      "zone": "SW",
+    },
+    {
+      "count": 4,
+      "max": 20,
+      "min": 3,
+      "ok": true,
+      "verdict": "ok",
+      "zone": "N",
+    },
+    {
+      "count": 10,
+      "max": 20,
+      "min": 3,
+      "ok": true,
+      "verdict": "ok",
+      "zone": "C",
+    },
+    {
+      "count": 3,
+      "max": 20,
+      "min": 3,
+      "ok": true,
+      "verdict": "ok",
+      "zone": "S",
+    },
+    {
+      "count": 1,
+      "max": 20,
+      "min": 3,
+      "ok": false,
+      "verdict": "sparse",
+      "zone": "NE",
+    },
+    {
+      "count": 5,
+      "max": 20,
+      "min": 3,
+      "ok": true,
+      "verdict": "ok",
+      "zone": "E",
+    },
+    {
+      "count": 3,
+      "max": 20,
+      "min": 3,
+      "ok": true,
+      "verdict": "ok",
+      "zone": "SE",
+    },
+  ],
+  "issues": [
+    "Spawn 0,0,-35 is inside the spawn-camp hard floor (5.1m < 8m) — obstruction is not a reliable defense.",
+    "Spawn 0,0,-35 has clear LOS to a common player position (5.1m away).",
+    "Zone SW cover count 1 is sparse (target 3..20).",
+    "Zone NE cover count 1 is sparse (target 3..20).",
+    "Boundary: 0 OOB spawns, 4 OOB props (outside ±38m).",
+  ],
+  "navmesh": {
+    "gaps": [],
+    "ok": true,
+    "reachableCells": 346,
+    "totalCells": 400,
+  },
+  "objectiveZones": [
+    {
+      "mode": "SURVIVAL",
+      "positions": [
+        [
+          0,
+          0,
+          0,
+        ],
+      ],
+      "radius": 40,
+      "type": "survival_arena",
+    },
+    {
+      "mode": "EXTRACTION",
+      "positions": [
+        [
+          -24,
+          0,
+          -24,
+        ],
+        [
+          24,
+          0,
+          24,
+        ],
+      ],
+      "radius": 3,
+      "type": "extraction_zone",
+    },
+    {
+      "mode": "SNIPER",
+      "positions": [
+        [
+          0,
+          0,
+          0,
+        ],
+      ],
+      "radius": 40,
+      "type": "survival_arena",
+    },
+  ],
+  "ok": false,
+  "respawnZones": [
+    {
+      "spawn": [
+        -30,
+        0,
+        -30,
+      ],
+      "stuck": false,
+    },
+    {
+      "spawn": [
+        30,
+        0,
+        -30,
+      ],
+      "stuck": false,
+    },
+    {
+      "spawn": [
+        -30,
+        0,
+        30,
+      ],
+      "stuck": false,
+    },
+    {
+      "spawn": [
+        30,
+        0,
+        30,
+      ],
+      "stuck": false,
+    },
+    {
+      "spawn": [
+        0,
+        0,
+        -35,
+      ],
+      "stuck": false,
+    },
+  ],
+  "sightlineLength": {
+    "bucketEdges": [
+      12,
+      24,
+      36,
+      48,
+      60,
+      72,
+      84,
+      96,
+    ],
+    "distribution": [
+      59,
+      161,
+      211,
+      136,
+      65,
+      16,
+      0,
+      0,
+    ],
+    "max": 65.7875368135941,
+    "mean": 30.654940202415656,
+    "median": 30.066592756745816,
+    "min": 4,
+    "samples": 648,
+  },
+  "slug": "rooftops",
+  "spawnSafety": [
+    {
+      "nearestPlayerDist": 11.357816691600547,
+      "obstructed": true,
+      "reason": "obstructed by cover between spawn and player",
+      "safe": true,
+      "spawn": [
+        -30,
+        0,
+        -30,
+      ],
+    },
+    {
+      "nearestPlayerDist": 31.63858403911275,
+      "obstructed": false,
+      "reason": "outside spawn-camp distance",
+      "safe": true,
+      "spawn": [
+        30,
+        0,
+        -30,
+      ],
+    },
+    {
+      "nearestPlayerDist": 30.121254953935768,
+      "obstructed": false,
+      "reason": "outside spawn-camp distance",
+      "safe": true,
+      "spawn": [
+        -30,
+        0,
+        30,
+      ],
+    },
+    {
+      "nearestPlayerDist": 30.121254953935768,
+      "obstructed": false,
+      "reason": "outside spawn-camp distance",
+      "safe": true,
+      "spawn": [
+        30,
+        0,
+        30,
+      ],
+    },
+    {
+      "nearestPlayerDist": 5.0990195135927845,
+      "obstructed": false,
+      "reason": "UNSAFE: clear LOS to a common player position within spawn-camp range",
+      "safe": false,
+      "spawn": [
+        0,
+        0,
+        -35,
+      ],
+    },
+  ],
+  "totalCover": 39,
+  "verticality": {
+    "isMultiLevel": true,
+    "levels": [
+      3,
+    ],
+    "verticalPropCount": 17,
+  },
+}
+`;
+
+exports[`MapValidator snapshots (one per registered map) desert: matches committed snapshot 1`] = `
+{
+  "boundary": {
+    "ok": true,
+    "outOfBoundsProps": [],
+    "outOfBoundsSpawns": [],
+  },
+  "bounds": 50,
+  "coverDensity": [
+    {
+      "count": 4,
+      "max": 20,
+      "min": 3,
+      "ok": true,
+      "verdict": "ok",
+      "zone": "NW",
+    },
+    {
+      "count": 11,
+      "max": 20,
+      "min": 3,
+      "ok": true,
+      "verdict": "ok",
+      "zone": "W",
+    },
+    {
+      "count": 2,
+      "max": 20,
+      "min": 3,
+      "ok": false,
+      "verdict": "sparse",
+      "zone": "SW",
+    },
+    {
+      "count": 4,
+      "max": 20,
+      "min": 3,
+      "ok": true,
+      "verdict": "ok",
+      "zone": "N",
+    },
+    {
+      "count": 11,
+      "max": 20,
+      "min": 3,
+      "ok": true,
+      "verdict": "ok",
+      "zone": "C",
+    },
+    {
+      "count": 7,
+      "max": 20,
+      "min": 3,
+      "ok": true,
+      "verdict": "ok",
+      "zone": "S",
+    },
+    {
+      "count": 3,
+      "max": 20,
+      "min": 3,
+      "ok": true,
+      "verdict": "ok",
+      "zone": "NE",
+    },
+    {
+      "count": 10,
+      "max": 20,
+      "min": 3,
+      "ok": true,
+      "verdict": "ok",
+      "zone": "E",
+    },
+    {
+      "count": 3,
+      "max": 20,
+      "min": 3,
+      "ok": true,
+      "verdict": "ok",
+      "zone": "SE",
+    },
+  ],
+  "issues": [
+    "Spawn 0,0,-45 is inside the spawn-camp hard floor (3.2m < 8m) — obstruction is not a reliable defense.",
+    "Spawn 0,0,-45 has clear LOS to a common player position (3.2m away).",
+    "Zone SW cover count 2 is sparse (target 3..20).",
+    "Sightline distribution is too open — 827/1462 sightlines exceed 40m.",
+    "Spawn -40,0,-40 is embedded inside a comms_tower AABB — enemies will spawn stuck.",
+    "Spawn 40,0,-40 is embedded inside a comms_tower AABB — enemies will spawn stuck.",
+  ],
+  "navmesh": {
+    "gaps": [],
+    "ok": true,
+    "reachableCells": 586,
+    "totalCells": 625,
+  },
+  "objectiveZones": [
+    {
+      "mode": "SURVIVAL",
+      "positions": [
+        [
+          0,
+          0,
+          0,
+        ],
+      ],
+      "radius": 50,
+      "type": "survival_arena",
+    },
+    {
+      "mode": "HORDE",
+      "positions": [
+        [
+          0,
+          0,
+          0,
+        ],
+      ],
+      "radius": 20,
+      "type": "horde_rally",
+    },
+    {
+      "mode": "EXTRACTION",
+      "positions": [
+        [
+          -30,
+          0,
+          -30,
+        ],
+        [
+          30,
+          0,
+          30,
+        ],
+      ],
+      "radius": 3,
+      "type": "extraction_zone",
+    },
+    {
+      "mode": "ZOMBIES",
+      "positions": [
+        [
+          0,
+          0,
+          0,
+        ],
+      ],
+      "radius": 20,
+      "type": "zombies_rally",
+    },
+  ],
+  "ok": false,
+  "respawnZones": [
+    {
+      "spawn": [
+        -40,
+        0,
+        -40,
+      ],
+      "stuck": true,
+      "stuckIn": "comms_tower",
+    },
+    {
+      "spawn": [
+        40,
+        0,
+        -40,
+      ],
+      "stuck": true,
+      "stuckIn": "comms_tower",
+    },
+    {
+      "spawn": [
+        -40,
+        0,
+        40,
+      ],
+      "stuck": false,
+    },
+    {
+      "spawn": [
+        40,
+        0,
+        40,
+      ],
+      "stuck": false,
+    },
+    {
+      "spawn": [
+        0,
+        0,
+        -45,
+      ],
+      "stuck": false,
+    },
+    {
+      "spawn": [
+        -45,
+        0,
+        0,
+      ],
+      "stuck": false,
+    },
+    {
+      "spawn": [
+        45,
+        0,
+        0,
+      ],
+      "stuck": false,
+    },
+  ],
+  "sightlineLength": {
+    "bucketEdges": [
+      15,
+      30,
+      45,
+      60,
+      75,
+      90,
+      105,
+      120,
+    ],
+    "distribution": [
+      113,
+      276,
+      385,
+      319,
+      212,
+      109,
+      40,
+      8,
+    ],
+    "max": 108.81176406988355,
+    "mean": 45.43371634290123,
+    "median": 43.41658669218482,
+    "min": 2.8284271247461903,
+    "samples": 1462,
+  },
+  "slug": "desert",
+  "spawnSafety": [
+    {
+      "nearestPlayerDist": 17.916472867168917,
+      "obstructed": false,
+      "reason": "outside spawn-camp distance",
+      "safe": true,
+      "spawn": [
+        -40,
+        0,
+        -40,
+      ],
+    },
+    {
+      "nearestPlayerDist": 17.916472867168917,
+      "obstructed": false,
+      "reason": "outside spawn-camp distance",
+      "safe": true,
+      "spawn": [
+        40,
+        0,
+        -40,
+      ],
+    },
+    {
+      "nearestPlayerDist": 17.916472867168917,
+      "obstructed": false,
+      "reason": "outside spawn-camp distance",
+      "safe": true,
+      "spawn": [
+        -40,
+        0,
+        40,
+      ],
+    },
+    {
+      "nearestPlayerDist": 40.80441152620633,
+      "obstructed": false,
+      "reason": "far from common player positions",
+      "safe": true,
+      "spawn": [
+        40,
+        0,
+        40,
+      ],
+    },
+    {
+      "nearestPlayerDist": 3.1622776601683795,
+      "obstructed": false,
+      "reason": "UNSAFE: clear LOS to a common player position within spawn-camp range",
+      "safe": false,
+      "spawn": [
+        0,
+        0,
+        -45,
+      ],
+    },
+    {
+      "nearestPlayerDist": 52.40229002629561,
+      "obstructed": false,
+      "reason": "far from common player positions",
+      "safe": true,
+      "spawn": [
+        -45,
+        0,
+        0,
+      ],
+    },
+    {
+      "nearestPlayerDist": 52.40229002629561,
+      "obstructed": false,
+      "reason": "far from common player positions",
+      "safe": true,
+      "spawn": [
+        45,
+        0,
+        0,
+      ],
+    },
+  ],
+  "totalCover": 55,
+  "verticality": {
+    "isMultiLevel": true,
+    "levels": [
+      12,
+    ],
+    "verticalPropCount": 8,
+  },
+}
+`;
+
+exports[`MapValidator snapshots (one per registered map) alley: matches committed snapshot 1`] = `
+{
+  "boundary": {
+    "ok": true,
+    "outOfBoundsProps": [],
+    "outOfBoundsSpawns": [],
+  },
+  "bounds": 38,
+  "coverDensity": [
+    {
+      "count": 1,
+      "max": 20,
+      "min": 3,
+      "ok": false,
+      "verdict": "sparse",
+      "zone": "NW",
+    },
+    {
+      "count": 6,
+      "max": 20,
+      "min": 3,
+      "ok": true,
+      "verdict": "ok",
+      "zone": "W",
+    },
+    {
+      "count": 6,
+      "max": 20,
+      "min": 3,
+      "ok": true,
+      "verdict": "ok",
+      "zone": "SW",
+    },
+    {
+      "count": 8,
+      "max": 20,
+      "min": 3,
+      "ok": true,
+      "verdict": "ok",
+      "zone": "N",
+    },
+    {
+      "count": 7,
+      "max": 20,
+      "min": 3,
+      "ok": true,
+      "verdict": "ok",
+      "zone": "C",
+    },
+    {
+      "count": 7,
+      "max": 20,
+      "min": 3,
+      "ok": true,
+      "verdict": "ok",
+      "zone": "S",
+    },
+    {
+      "count": 5,
+      "max": 20,
+      "min": 3,
+      "ok": true,
+      "verdict": "ok",
+      "zone": "NE",
+    },
+    {
+      "count": 6,
+      "max": 20,
+      "min": 3,
+      "ok": true,
+      "verdict": "ok",
+      "zone": "E",
+    },
+    {
+      "count": 1,
+      "max": 20,
+      "min": 3,
+      "ok": false,
+      "verdict": "sparse",
+      "zone": "SE",
+    },
+  ],
+  "issues": [
+    "Spawn -30,0,-30 is inside the spawn-camp hard floor (4.1m < 8m) — obstruction is not a reliable defense.",
+    "Spawn -30,0,-30 has clear LOS to a common player position (4.1m away).",
+    "Spawn 30,0,-30 is inside the spawn-camp hard floor (4.1m < 8m) — obstruction is not a reliable defense.",
+    "Spawn 30,0,-30 has clear LOS to a common player position (4.1m away).",
+    "Spawn -30,0,30 is inside the spawn-camp hard floor (4.1m < 8m) — obstruction is not a reliable defense.",
+    "Spawn -30,0,30 has clear LOS to a common player position (4.1m away).",
+    "Spawn 30,0,30 is inside the spawn-camp hard floor (4.1m < 8m) — obstruction is not a reliable defense.",
+    "Spawn 30,0,30 has clear LOS to a common player position (4.1m away).",
+    "Spawn 0,0,-35 is inside the spawn-camp hard floor (1.4m < 8m) — obstruction is not a reliable defense.",
+    "Spawn 0,0,-35 has clear LOS to a common player position (1.4m away).",
+    "Zone NW cover count 1 is sparse (target 3..20).",
+    "Zone SE cover count 1 is sparse (target 3..20).",
+    "Spawn -30,0,-30 is embedded inside a building AABB — enemies will spawn stuck.",
+    "Spawn 30,0,-30 is embedded inside a building AABB — enemies will spawn stuck.",
+    "Spawn -30,0,30 is embedded inside a building AABB — enemies will spawn stuck.",
+    "Spawn 30,0,30 is embedded inside a building AABB — enemies will spawn stuck.",
+    "Spawn 0,0,-35 is embedded inside a building AABB — enemies will spawn stuck.",
+  ],
+  "navmesh": {
+    "gaps": [],
+    "ok": true,
+    "reachableCells": 293,
+    "totalCells": 361,
+  },
+  "objectiveZones": [
+    {
+      "mode": "BREACH",
+      "positions": [
+        [
+          -25,
+          0,
+          -25,
+        ],
+        [
+          25,
+          0,
+          -25,
+        ],
+        [
+          -25,
+          0,
+          25,
+        ],
+        [
+          25,
+          0,
+          25,
+        ],
+        [
+          0,
+          0,
+          0,
+        ],
+      ],
+      "type": "breach_rooms",
+    },
+    {
+      "mode": "SURVIVAL",
+      "positions": [
+        [
+          0,
+          0,
+          0,
+        ],
+      ],
+      "radius": 38,
+      "type": "survival_arena",
+    },
+    {
+      "mode": "VIP",
+      "positions": [
+        [
+          0,
+          0,
+          12,
+        ],
+        [
+          -15,
+          0,
+          0,
+        ],
+        [
+          0,
+          0,
+          -12,
+        ],
+        [
+          15,
+          0,
+          0,
+        ],
+      ],
+      "type": "vip_waypoints",
+    },
+  ],
+  "ok": false,
+  "respawnZones": [
+    {
+      "spawn": [
+        -30,
+        0,
+        -30,
+      ],
+      "stuck": true,
+      "stuckIn": "building",
+    },
+    {
+      "spawn": [
+        30,
+        0,
+        -30,
+      ],
+      "stuck": true,
+      "stuckIn": "building",
+    },
+    {
+      "spawn": [
+        -30,
+        0,
+        30,
+      ],
+      "stuck": true,
+      "stuckIn": "building",
+    },
+    {
+      "spawn": [
+        30,
+        0,
+        30,
+      ],
+      "stuck": true,
+      "stuckIn": "building",
+    },
+    {
+      "spawn": [
+        0,
+        0,
+        -35,
+      ],
+      "stuck": true,
+      "stuckIn": "building",
+    },
+  ],
+  "sightlineLength": {
+    "bucketEdges": [
+      11.4,
+      22.8,
+      34.2,
+      45.6,
+      57,
+      68.4,
+      79.8,
+      91.2,
+    ],
+    "distribution": [
+      62,
+      177,
+      160,
+      101,
+      75,
+      11,
+      1,
+      0,
+    ],
+    "max": 68.87670143089025,
+    "mean": 28.46611678535888,
+    "median": 26.248809496813376,
+    "min": 2,
+    "samples": 587,
+  },
+  "slug": "alley",
+  "spawnSafety": [
+    {
+      "nearestPlayerDist": 4.123105625617661,
+      "obstructed": false,
+      "reason": "UNSAFE: clear LOS to a common player position within spawn-camp range",
+      "safe": false,
+      "spawn": [
+        -30,
+        0,
+        -30,
+      ],
+    },
+    {
+      "nearestPlayerDist": 4.123105625617661,
+      "obstructed": false,
+      "reason": "UNSAFE: clear LOS to a common player position within spawn-camp range",
+      "safe": false,
+      "spawn": [
+        30,
+        0,
+        -30,
+      ],
+    },
+    {
+      "nearestPlayerDist": 4.123105625617661,
+      "obstructed": false,
+      "reason": "UNSAFE: clear LOS to a common player position within spawn-camp range",
+      "safe": false,
+      "spawn": [
+        -30,
+        0,
+        30,
+      ],
+    },
+    {
+      "nearestPlayerDist": 4.123105625617661,
+      "obstructed": false,
+      "reason": "UNSAFE: clear LOS to a common player position within spawn-camp range",
+      "safe": false,
+      "spawn": [
+        30,
+        0,
+        30,
+      ],
+    },
+    {
+      "nearestPlayerDist": 1.4142135623730951,
+      "obstructed": false,
+      "reason": "UNSAFE: clear LOS to a common player position within spawn-camp range",
+      "safe": false,
+      "spawn": [
+        0,
+        0,
+        -35,
+      ],
+    },
+  ],
+  "totalCover": 47,
+  "verticality": {
+    "isMultiLevel": true,
+    "levels": [
+      4,
+      6,
+    ],
+    "verticalPropCount": 20,
+  },
+}
+`;
+
+exports[`MapValidator snapshots (one per registered map) training: matches committed snapshot 1`] = `
+{
+  "boundary": {
+    "ok": false,
+    "outOfBoundsProps": [
+      {
+        "position": [
+          0,
+          1.5,
+          -42,
+        ],
+        "type": "box",
+      },
+      {
+        "position": [
+          0,
+          1.5,
+          42,
+        ],
+        "type": "box",
+      },
+      {
+        "position": [
+          -42,
+          1.5,
+          0,
+        ],
+        "type": "box",
+      },
+      {
+        "position": [
+          42,
+          1.5,
+          0,
+        ],
+        "type": "box",
+      },
+    ],
+    "outOfBoundsSpawns": [],
+  },
+  "bounds": 42,
+  "coverDensity": [
+    {
+      "count": 3,
+      "max": 20,
+      "min": 3,
+      "ok": true,
+      "verdict": "ok",
+      "zone": "NW",
+    },
+    {
+      "count": 11,
+      "max": 20,
+      "min": 3,
+      "ok": true,
+      "verdict": "ok",
+      "zone": "W",
+    },
+    {
+      "count": 1,
+      "max": 20,
+      "min": 3,
+      "ok": false,
+      "verdict": "sparse",
+      "zone": "SW",
+    },
+    {
+      "count": 2,
+      "max": 20,
+      "min": 3,
+      "ok": false,
+      "verdict": "sparse",
+      "zone": "N",
+    },
+    {
+      "count": 8,
+      "max": 20,
+      "min": 3,
+      "ok": true,
+      "verdict": "ok",
+      "zone": "C",
+    },
+    {
+      "count": 1,
+      "max": 20,
+      "min": 3,
+      "ok": false,
+      "verdict": "sparse",
+      "zone": "S",
+    },
+    {
+      "count": 1,
+      "max": 20,
+      "min": 3,
+      "ok": false,
+      "verdict": "sparse",
+      "zone": "NE",
+    },
+    {
+      "count": 10,
+      "max": 20,
+      "min": 3,
+      "ok": true,
+      "verdict": "ok",
+      "zone": "E",
+    },
+    {
+      "count": 3,
+      "max": 20,
+      "min": 3,
+      "ok": true,
+      "verdict": "ok",
+      "zone": "SE",
+    },
+  ],
+  "issues": [
+    "Spawn -35,0,-35 is inside the spawn-camp hard floor (1.7m < 8m) — obstruction is not a reliable defense.",
+    "Spawn -35,0,-35 has clear LOS to a common player position (1.7m away).",
+    "Spawn 0,0,-38 is inside the spawn-camp hard floor (4.1m < 8m) — obstruction is not a reliable defense.",
+    "Spawn 0,0,-38 has clear LOS to a common player position (4.1m away).",
+    "Zone SW cover count 1 is sparse (target 3..20).",
+    "Zone N cover count 2 is sparse (target 3..20).",
+    "Zone S cover count 1 is sparse (target 3..20).",
+    "Zone NE cover count 1 is sparse (target 3..20).",
+    "Spawn -35,0,-35 is embedded inside a comms_tower AABB — enemies will spawn stuck.",
+    "Spawn 35,0,35 is embedded inside a comms_tower AABB — enemies will spawn stuck.",
+    "Boundary: 0 OOB spawns, 4 OOB props (outside ±40m).",
+  ],
+  "navmesh": {
+    "gaps": [],
+    "ok": true,
+    "reachableCells": 413,
+    "totalCells": 441,
+  },
+  "objectiveZones": [
+    {
+      "mode": "SURVIVAL",
+      "positions": [
+        [
+          0,
+          0,
+          0,
+        ],
+      ],
+      "radius": 42,
+      "type": "survival_arena",
+    },
+    {
+      "mode": "HORDE",
+      "positions": [
+        [
+          0,
+          0,
+          0,
+        ],
+      ],
+      "radius": 16.8,
+      "type": "horde_rally",
+    },
+    {
+      "mode": "BREACH",
+      "positions": [
+        [
+          -25,
+          0,
+          -25,
+        ],
+        [
+          25,
+          0,
+          -25,
+        ],
+        [
+          -25,
+          0,
+          25,
+        ],
+        [
+          25,
+          0,
+          25,
+        ],
+        [
+          0,
+          0,
+          0,
+        ],
+      ],
+      "type": "breach_rooms",
+    },
+    {
+      "mode": "ZOMBIES",
+      "positions": [
+        [
+          0,
+          0,
+          0,
+        ],
+      ],
+      "radius": 16.8,
+      "type": "zombies_rally",
+    },
+  ],
+  "ok": false,
+  "respawnZones": [
+    {
+      "spawn": [
+        -35,
+        0,
+        -35,
+      ],
+      "stuck": true,
+      "stuckIn": "comms_tower",
+    },
+    {
+      "spawn": [
+        35,
+        0,
+        -35,
+      ],
+      "stuck": false,
+    },
+    {
+      "spawn": [
+        -35,
+        0,
+        35,
+      ],
+      "stuck": false,
+    },
+    {
+      "spawn": [
+        35,
+        0,
+        35,
+      ],
+      "stuck": true,
+      "stuckIn": "comms_tower",
+    },
+    {
+      "spawn": [
+        0,
+        0,
+        -38,
+      ],
+      "stuck": false,
+    },
+  ],
+  "sightlineLength": {
+    "bucketEdges": [
+      12.6,
+      25.2,
+      37.8,
+      50.4,
+      63,
+      75.6,
+      88.2,
+      100.8,
+    ],
+    "distribution": [
+      46,
+      90,
+      117,
+      84,
+      49,
+      26,
+      5,
+      1,
+    ],
+    "max": 101.82337649086284,
+    "mean": 34.2921338298662,
+    "median": 33.60059523282288,
+    "min": 3,
+    "samples": 418,
+  },
+  "slug": "training",
+  "spawnSafety": [
+    {
+      "nearestPlayerDist": 1.7320508075688772,
+      "obstructed": false,
+      "reason": "UNSAFE: clear LOS to a common player position within spawn-camp range",
+      "safe": false,
+      "spawn": [
+        -35,
+        0,
+        -35,
+      ],
+    },
+    {
+      "nearestPlayerDist": 35.70714214271425,
+      "obstructed": false,
+      "reason": "outside spawn-camp distance",
+      "safe": true,
+      "spawn": [
+        35,
+        0,
+        -35,
+      ],
+    },
+    {
+      "nearestPlayerDist": 35.2319457311117,
+      "obstructed": false,
+      "reason": "outside spawn-camp distance",
+      "safe": true,
+      "spawn": [
+        -35,
+        0,
+        35,
+      ],
+    },
+    {
+      "nearestPlayerDist": 35.2319457311117,
+      "obstructed": true,
+      "reason": "obstructed by cover between spawn and player",
+      "safe": true,
+      "spawn": [
+        35,
+        0,
+        35,
+      ],
+    },
+    {
+      "nearestPlayerDist": 4.123105625617661,
+      "obstructed": false,
+      "reason": "UNSAFE: clear LOS to a common player position within spawn-camp range",
+      "safe": false,
+      "spawn": [
+        0,
+        0,
+        -38,
+      ],
+    },
+  ],
+  "totalCover": 42,
+  "verticality": {
+    "isMultiLevel": true,
+    "levels": [
+      3,
+      4,
+      12,
+    ],
+    "verticalPropCount": 12,
+  },
+}
+`;
+
+exports[`MapValidator snapshots (one per registered map) practice_range: matches committed snapshot 1`] = `
+{
+  "boundary": {
+    "ok": false,
+    "outOfBoundsProps": [
+      {
+        "position": [
+          0,
+          2,
+          -60,
+        ],
+        "type": "box",
+      },
+      {
+        "position": [
+          0,
+          2,
+          60,
+        ],
+        "type": "box",
+      },
+      {
+        "position": [
+          -60,
+          2,
+          0,
+        ],
+        "type": "box",
+      },
+      {
+        "position": [
+          60,
+          2,
+          0,
+        ],
+        "type": "box",
+      },
+    ],
+    "outOfBoundsSpawns": [],
+  },
+  "bounds": 60,
+  "coverDensity": [
+    {
+      "count": 0,
+      "max": 20,
+      "min": 3,
+      "ok": false,
+      "verdict": "sparse",
+      "zone": "NW",
+    },
+    {
+      "count": 1,
+      "max": 20,
+      "min": 3,
+      "ok": false,
+      "verdict": "sparse",
+      "zone": "W",
+    },
+    {
+      "count": 0,
+      "max": 20,
+      "min": 3,
+      "ok": false,
+      "verdict": "sparse",
+      "zone": "SW",
+    },
+    {
+      "count": 1,
+      "max": 20,
+      "min": 3,
+      "ok": false,
+      "verdict": "sparse",
+      "zone": "N",
+    },
+    {
+      "count": 0,
+      "max": 20,
+      "min": 3,
+      "ok": false,
+      "verdict": "sparse",
+      "zone": "C",
+    },
+    {
+      "count": 9,
+      "max": 20,
+      "min": 3,
+      "ok": true,
+      "verdict": "ok",
+      "zone": "S",
+    },
+    {
+      "count": 0,
+      "max": 20,
+      "min": 3,
+      "ok": false,
+      "verdict": "sparse",
+      "zone": "NE",
+    },
+    {
+      "count": 0,
+      "max": 20,
+      "min": 3,
+      "ok": false,
+      "verdict": "sparse",
+      "zone": "E",
+    },
+    {
+      "count": 0,
+      "max": 20,
+      "min": 3,
+      "ok": false,
+      "verdict": "sparse",
+      "zone": "SE",
+    },
+  ],
+  "issues": [
+    "Zone NW cover count 0 is sparse (target 3..20).",
+    "Zone W cover count 1 is sparse (target 3..20).",
+    "Zone SW cover count 0 is sparse (target 3..20).",
+    "Zone N cover count 1 is sparse (target 3..20).",
+    "Zone C cover count 0 is sparse (target 3..20).",
+    "Zone NE cover count 0 is sparse (target 3..20).",
+    "Zone E cover count 0 is sparse (target 3..20).",
+    "Zone SE cover count 0 is sparse (target 3..20).",
+    "Sightline distribution is too open — 35/78 sightlines exceed 40m.",
+    "Boundary: 0 OOB spawns, 4 OOB props (outside ±58m).",
+  ],
+  "navmesh": {
+    "gaps": [],
+    "ok": true,
+    "reachableCells": 900,
+    "totalCells": 900,
+  },
+  "objectiveZones": [
+    {
+      "mode": "PRACTICE_RANGE",
+      "positions": [
+        [
+          0,
+          0,
+          0,
+        ],
+      ],
+      "radius": 60,
+      "type": "practice_sandbox",
+    },
+  ],
+  "ok": false,
+  "respawnZones": [],
+  "sightlineLength": {
+    "bucketEdges": [
+      18,
+      36,
+      54,
+      72,
+      90,
+      108,
+      126,
+      144,
+    ],
+    "distribution": [
+      15,
+      26,
+      6,
+      4,
+      18,
+      4,
+      5,
+      0,
+    ],
+    "max": 120,
+    "mean": 47.997462643553824,
+    "median": 34.52535300326414,
+    "min": 4.123105625617661,
+    "samples": 78,
+  },
+  "slug": "practice_range",
+  "spawnSafety": [],
+  "totalCover": 13,
+  "verticality": {
+    "isMultiLevel": true,
+    "levels": [
+      4,
+    ],
+    "verticalPropCount": 4,
+  },
+}
+`;
+
+exports[`MapValidator snapshots (one per registered map) bunker: matches committed snapshot 1`] = `
+{
+  "boundary": {
+    "ok": false,
+    "outOfBoundsProps": [
+      {
+        "position": [
+          0,
+          4,
+          -32,
+        ],
+        "type": "box",
+      },
+      {
+        "position": [
+          0,
+          4,
+          32,
+        ],
+        "type": "box",
+      },
+      {
+        "position": [
+          -32,
+          4,
+          0,
+        ],
+        "type": "box",
+      },
+      {
+        "position": [
+          32,
+          4,
+          0,
+        ],
+        "type": "box",
+      },
+    ],
+    "outOfBoundsSpawns": [],
+  },
+  "bounds": 32,
+  "coverDensity": [
+    {
+      "count": 2,
+      "max": 20,
+      "min": 3,
+      "ok": false,
+      "verdict": "sparse",
+      "zone": "NW",
+    },
+    {
+      "count": 5,
+      "max": 20,
+      "min": 3,
+      "ok": true,
+      "verdict": "ok",
+      "zone": "W",
+    },
+    {
+      "count": 2,
+      "max": 20,
+      "min": 3,
+      "ok": false,
+      "verdict": "sparse",
+      "zone": "SW",
+    },
+    {
+      "count": 2,
+      "max": 20,
+      "min": 3,
+      "ok": false,
+      "verdict": "sparse",
+      "zone": "N",
+    },
+    {
+      "count": 11,
+      "max": 20,
+      "min": 3,
+      "ok": true,
+      "verdict": "ok",
+      "zone": "C",
+    },
+    {
+      "count": 1,
+      "max": 20,
+      "min": 3,
+      "ok": false,
+      "verdict": "sparse",
+      "zone": "S",
+    },
+    {
+      "count": 2,
+      "max": 20,
+      "min": 3,
+      "ok": false,
+      "verdict": "sparse",
+      "zone": "NE",
+    },
+    {
+      "count": 4,
+      "max": 20,
+      "min": 3,
+      "ok": true,
+      "verdict": "ok",
+      "zone": "E",
+    },
+    {
+      "count": 2,
+      "max": 20,
+      "min": 3,
+      "ok": false,
+      "verdict": "sparse",
+      "zone": "SE",
+    },
+  ],
+  "issues": [
+    "Spawn 0,0,-26 is inside the spawn-camp hard floor (6.1m < 8m) — obstruction is not a reliable defense.",
+    "Spawn 0,0,-26 has clear LOS to a common player position (6.1m away).",
+    "Zone NW cover count 2 is sparse (target 3..20).",
+    "Zone SW cover count 2 is sparse (target 3..20).",
+    "Zone N cover count 2 is sparse (target 3..20).",
+    "Zone S cover count 1 is sparse (target 3..20).",
+    "Zone NE cover count 2 is sparse (target 3..20).",
+    "Zone SE cover count 2 is sparse (target 3..20).",
+    "Spawn -22,0,-22 is embedded inside a box AABB — enemies will spawn stuck.",
+    "Spawn 22,0,-22 is embedded inside a box AABB — enemies will spawn stuck.",
+    "Spawn -22,0,22 is embedded inside a box AABB — enemies will spawn stuck.",
+    "Spawn 22,0,22 is embedded inside a glass_panel AABB — enemies will spawn stuck.",
+    "Boundary: 0 OOB spawns, 4 OOB props (outside ±30m).",
+  ],
+  "navmesh": {
+    "gaps": [],
+    "ok": true,
+    "reachableCells": 224,
+    "totalCells": 256,
+  },
+  "objectiveZones": [
+    {
+      "mode": "BREACH",
+      "positions": [
+        [
+          -25,
+          0,
+          -25,
+        ],
+        [
+          25,
+          0,
+          -25,
+        ],
+        [
+          -25,
+          0,
+          25,
+        ],
+        [
+          25,
+          0,
+          25,
+        ],
+        [
+          0,
+          0,
+          0,
+        ],
+      ],
+      "type": "breach_rooms",
+    },
+    {
+      "mode": "SURVIVAL",
+      "positions": [
+        [
+          0,
+          0,
+          0,
+        ],
+      ],
+      "radius": 32,
+      "type": "survival_arena",
+    },
+    {
+      "mode": "HORDE",
+      "positions": [
+        [
+          0,
+          0,
+          0,
+        ],
+      ],
+      "radius": 12.8,
+      "type": "horde_rally",
+    },
+  ],
+  "ok": false,
+  "respawnZones": [
+    {
+      "spawn": [
+        -22,
+        0,
+        -22,
+      ],
+      "stuck": true,
+      "stuckIn": "box",
+    },
+    {
+      "spawn": [
+        22,
+        0,
+        -22,
+      ],
+      "stuck": true,
+      "stuckIn": "box",
+    },
+    {
+      "spawn": [
+        -22,
+        0,
+        22,
+      ],
+      "stuck": true,
+      "stuckIn": "box",
+    },
+    {
+      "spawn": [
+        22,
+        0,
+        22,
+      ],
+      "stuck": true,
+      "stuckIn": "glass_panel",
+    },
+    {
+      "spawn": [
+        0,
+        0,
+        -26,
+      ],
+      "stuck": false,
+    },
+  ],
+  "sightlineLength": {
+    "bucketEdges": [
+      9.6,
+      19.2,
+      28.8,
+      38.4,
+      48,
+      57.6,
+      67.2,
+      76.8,
+    ],
+    "distribution": [
+      38,
+      111,
+      101,
+      59,
+      52,
+      11,
+      2,
+      0,
+    ],
+    "max": 64,
+    "mean": 24.497203672508398,
+    "median": 23.323807579381203,
+    "min": 2.8284271247461903,
+    "samples": 374,
+  },
+  "slug": "bunker",
+  "spawnSafety": [
+    {
+      "nearestPlayerDist": 24.186773244895647,
+      "obstructed": true,
+      "reason": "obstructed by cover between spawn and player",
+      "safe": true,
+      "spawn": [
+        -22,
+        0,
+        -22,
+      ],
+    },
+    {
+      "nearestPlayerDist": 24.186773244895647,
+      "obstructed": true,
+      "reason": "obstructed by cover between spawn and player",
+      "safe": true,
+      "spawn": [
+        22,
+        0,
+        -22,
+      ],
+    },
+    {
+      "nearestPlayerDist": 22.255111772354685,
+      "obstructed": true,
+      "reason": "obstructed by cover between spawn and player",
+      "safe": true,
+      "spawn": [
+        -22,
+        0,
+        22,
+      ],
+    },
+    {
+      "nearestPlayerDist": 22.255111772354685,
+      "obstructed": true,
+      "reason": "obstructed by cover between spawn and player",
+      "safe": true,
+      "spawn": [
+        22,
+        0,
+        22,
+      ],
+    },
+    {
+      "nearestPlayerDist": 6.082762530298219,
+      "obstructed": false,
+      "reason": "UNSAFE: clear LOS to a common player position within spawn-camp range",
+      "safe": false,
+      "spawn": [
+        0,
+        0,
+        -26,
+      ],
+    },
+  ],
+  "totalCover": 33,
+  "verticality": {
+    "isMultiLevel": true,
+    "levels": [
+      4,
+      8,
+    ],
+    "verticalPropCount": 16,
+  },
+}
+`;
+
+exports[`MapValidator snapshots (one per registered map) mansion: matches committed snapshot 1`] = `
+{
+  "boundary": {
+    "ok": false,
+    "outOfBoundsProps": [
+      {
+        "position": [
+          0,
+          4,
+          -36,
+        ],
+        "type": "box",
+      },
+      {
+        "position": [
+          0,
+          4,
+          36,
+        ],
+        "type": "box",
+      },
+      {
+        "position": [
+          -36,
+          4,
+          0,
+        ],
+        "type": "box",
+      },
+      {
+        "position": [
+          36,
+          4,
+          0,
+        ],
+        "type": "box",
+      },
+    ],
+    "outOfBoundsSpawns": [],
+  },
+  "bounds": 36,
+  "coverDensity": [
+    {
+      "count": 1,
+      "max": 20,
+      "min": 3,
+      "ok": false,
+      "verdict": "sparse",
+      "zone": "NW",
+    },
+    {
+      "count": 4,
+      "max": 20,
+      "min": 3,
+      "ok": true,
+      "verdict": "ok",
+      "zone": "W",
+    },
+    {
+      "count": 3,
+      "max": 20,
+      "min": 3,
+      "ok": true,
+      "verdict": "ok",
+      "zone": "SW",
+    },
+    {
+      "count": 1,
+      "max": 20,
+      "min": 3,
+      "ok": false,
+      "verdict": "sparse",
+      "zone": "N",
+    },
+    {
+      "count": 14,
+      "max": 20,
+      "min": 3,
+      "ok": true,
+      "verdict": "ok",
+      "zone": "C",
+    },
+    {
+      "count": 2,
+      "max": 20,
+      "min": 3,
+      "ok": false,
+      "verdict": "sparse",
+      "zone": "S",
+    },
+    {
+      "count": 2,
+      "max": 20,
+      "min": 3,
+      "ok": false,
+      "verdict": "sparse",
+      "zone": "NE",
+    },
+    {
+      "count": 6,
+      "max": 20,
+      "min": 3,
+      "ok": true,
+      "verdict": "ok",
+      "zone": "E",
+    },
+    {
+      "count": 1,
+      "max": 20,
+      "min": 3,
+      "ok": false,
+      "verdict": "sparse",
+      "zone": "SE",
+    },
+  ],
+  "issues": [
+    "Spawn 0,0,-32 is inside the spawn-camp hard floor (4.1m < 8m) — obstruction is not a reliable defense.",
+    "Spawn 0,0,-32 has clear LOS to a common player position (4.1m away).",
+    "Zone NW cover count 1 is sparse (target 3..20).",
+    "Zone N cover count 1 is sparse (target 3..20).",
+    "Zone S cover count 2 is sparse (target 3..20).",
+    "Zone NE cover count 2 is sparse (target 3..20).",
+    "Zone SE cover count 1 is sparse (target 3..20).",
+    "Boundary: 0 OOB spawns, 4 OOB props (outside ±34m).",
+  ],
+  "navmesh": {
+    "gaps": [],
+    "ok": true,
+    "reachableCells": 252,
+    "totalCells": 324,
+  },
+  "objectiveZones": [
+    {
+      "mode": "BREACH",
+      "positions": [
+        [
+          -25,
+          0,
+          -25,
+        ],
+        [
+          25,
+          0,
+          -25,
+        ],
+        [
+          -25,
+          0,
+          25,
+        ],
+        [
+          25,
+          0,
+          25,
+        ],
+        [
+          0,
+          0,
+          0,
+        ],
+      ],
+      "type": "breach_rooms",
+    },
+    {
+      "mode": "SURVIVAL",
+      "positions": [
+        [
+          0,
+          0,
+          0,
+        ],
+      ],
+      "radius": 36,
+      "type": "survival_arena",
+    },
+    {
+      "mode": "VIP",
+      "positions": [
+        [
+          0,
+          0,
+          12,
+        ],
+        [
+          -15,
+          0,
+          0,
+        ],
+        [
+          0,
+          0,
+          -12,
+        ],
+        [
+          15,
+          0,
+          0,
+        ],
+      ],
+      "type": "vip_waypoints",
+    },
+  ],
+  "ok": false,
+  "respawnZones": [
+    {
+      "spawn": [
+        -28,
+        0,
+        -28,
+      ],
+      "stuck": false,
+    },
+    {
+      "spawn": [
+        28,
+        0,
+        -28,
+      ],
+      "stuck": false,
+    },
+    {
+      "spawn": [
+        -28,
+        0,
+        28,
+      ],
+      "stuck": false,
+    },
+    {
+      "spawn": [
+        28,
+        0,
+        28,
+      ],
+      "stuck": false,
+    },
+    {
+      "spawn": [
+        0,
+        0,
+        -32,
+      ],
+      "stuck": false,
+    },
+  ],
+  "sightlineLength": {
+    "bucketEdges": [
+      10.8,
+      21.6,
+      32.4,
+      43.2,
+      54,
+      64.8,
+      75.6,
+      86.4,
+    ],
+    "distribution": [
+      33,
+      86,
+      72,
+      40,
+      20,
+      14,
+      0,
+      0,
+    ],
+    "max": 62.03224967708329,
+    "mean": 25.72676052430034,
+    "median": 24.166091947189145,
+    "min": 2,
+    "samples": 265,
+  },
+  "slug": "mansion",
+  "spawnSafety": [
+    {
+      "nearestPlayerDist": 29.13760456866693,
+      "obstructed": false,
+      "reason": "outside spawn-camp distance",
+      "safe": true,
+      "spawn": [
+        -28,
+        0,
+        -28,
+      ],
+    },
+    {
+      "nearestPlayerDist": 29.13760456866693,
+      "obstructed": false,
+      "reason": "outside spawn-camp distance",
+      "safe": true,
+      "spawn": [
+        28,
+        0,
+        -28,
+      ],
+    },
+    {
+      "nearestPlayerDist": 28.1298773548695,
+      "obstructed": false,
+      "reason": "outside spawn-camp distance",
+      "safe": true,
+      "spawn": [
+        -28,
+        0,
+        28,
+      ],
+    },
+    {
+      "nearestPlayerDist": 28.1298773548695,
+      "obstructed": false,
+      "reason": "outside spawn-camp distance",
+      "safe": true,
+      "spawn": [
+        28,
+        0,
+        28,
+      ],
+    },
+    {
+      "nearestPlayerDist": 4.123105625617661,
+      "obstructed": false,
+      "reason": "UNSAFE: clear LOS to a common player position within spawn-camp range",
+      "safe": false,
+      "spawn": [
+        0,
+        0,
+        -32,
+      ],
+    },
+  ],
+  "totalCover": 36,
+  "verticality": {
+    "isMultiLevel": true,
+    "levels": [
+      4,
+      5,
+      6,
+      8,
+    ],
+    "verticalPropCount": 18,
+  },
+}
+`;
+
+exports[`MapValidator snapshots (one per registered map) subway: matches committed snapshot 1`] = `
+{
+  "boundary": {
+    "ok": false,
+    "outOfBoundsProps": [
+      {
+        "position": [
+          0,
+          5,
+          -40,
+        ],
+        "type": "box",
+      },
+      {
+        "position": [
+          0,
+          5,
+          40,
+        ],
+        "type": "box",
+      },
+      {
+        "position": [
+          -40,
+          5,
+          0,
+        ],
+        "type": "box",
+      },
+      {
+        "position": [
+          40,
+          5,
+          0,
+        ],
+        "type": "box",
+      },
+    ],
+    "outOfBoundsSpawns": [],
+  },
+  "bounds": 40,
+  "coverDensity": [
+    {
+      "count": 2,
+      "max": 20,
+      "min": 3,
+      "ok": false,
+      "verdict": "sparse",
+      "zone": "NW",
+    },
+    {
+      "count": 4,
+      "max": 20,
+      "min": 3,
+      "ok": true,
+      "verdict": "ok",
+      "zone": "W",
+    },
+    {
+      "count": 2,
+      "max": 20,
+      "min": 3,
+      "ok": false,
+      "verdict": "sparse",
+      "zone": "SW",
+    },
+    {
+      "count": 4,
+      "max": 20,
+      "min": 3,
+      "ok": true,
+      "verdict": "ok",
+      "zone": "N",
+    },
+    {
+      "count": 14,
+      "max": 20,
+      "min": 3,
+      "ok": true,
+      "verdict": "ok",
+      "zone": "C",
+    },
+    {
+      "count": 3,
+      "max": 20,
+      "min": 3,
+      "ok": true,
+      "verdict": "ok",
+      "zone": "S",
+    },
+    {
+      "count": 2,
+      "max": 20,
+      "min": 3,
+      "ok": false,
+      "verdict": "sparse",
+      "zone": "NE",
+    },
+    {
+      "count": 3,
+      "max": 20,
+      "min": 3,
+      "ok": true,
+      "verdict": "ok",
+      "zone": "E",
+    },
+    {
+      "count": 2,
+      "max": 20,
+      "min": 3,
+      "ok": false,
+      "verdict": "sparse",
+      "zone": "SE",
+    },
+  ],
+  "issues": [
+    "Spawn 0,0,-34 is inside the spawn-camp hard floor (6.1m < 8m) — obstruction is not a reliable defense.",
+    "Spawn 0,0,-34 has clear LOS to a common player position (6.1m away).",
+    "Zone NW cover count 2 is sparse (target 3..20).",
+    "Zone SW cover count 2 is sparse (target 3..20).",
+    "Zone NE cover count 2 is sparse (target 3..20).",
+    "Zone SE cover count 2 is sparse (target 3..20).",
+    "Boundary: 0 OOB spawns, 4 OOB props (outside ±38m).",
+  ],
+  "navmesh": {
+    "gaps": [],
+    "ok": true,
+    "reachableCells": 354,
+    "totalCells": 400,
+  },
+  "objectiveZones": [
+    {
+      "mode": "SURVIVAL",
+      "positions": [
+        [
+          0,
+          0,
+          0,
+        ],
+      ],
+      "radius": 40,
+      "type": "survival_arena",
+    },
+    {
+      "mode": "BREACH",
+      "positions": [
+        [
+          -25,
+          0,
+          -25,
+        ],
+        [
+          25,
+          0,
+          -25,
+        ],
+        [
+          -25,
+          0,
+          25,
+        ],
+        [
+          25,
+          0,
+          25,
+        ],
+        [
+          0,
+          0,
+          0,
+        ],
+      ],
+      "type": "breach_rooms",
+    },
+    {
+      "mode": "EXTRACTION",
+      "positions": [
+        [
+          -24,
+          0,
+          -24,
+        ],
+        [
+          24,
+          0,
+          24,
+        ],
+      ],
+      "radius": 3,
+      "type": "extraction_zone",
+    },
+  ],
+  "ok": false,
+  "respawnZones": [
+    {
+      "spawn": [
+        -30,
+        0,
+        -30,
+      ],
+      "stuck": false,
+    },
+    {
+      "spawn": [
+        30,
+        0,
+        -30,
+      ],
+      "stuck": false,
+    },
+    {
+      "spawn": [
+        -30,
+        0,
+        30,
+      ],
+      "stuck": false,
+    },
+    {
+      "spawn": [
+        30,
+        0,
+        30,
+      ],
+      "stuck": false,
+    },
+    {
+      "spawn": [
+        0,
+        0,
+        -34,
+      ],
+      "stuck": false,
+    },
+  ],
+  "sightlineLength": {
+    "bucketEdges": [
+      12,
+      24,
+      36,
+      48,
+      60,
+      72,
+      84,
+      96,
+    ],
+    "distribution": [
+      63,
+      140,
+      119,
+      68,
+      28,
+      10,
+      2,
+      0,
+    ],
+    "max": 80,
+    "mean": 27.08551313999104,
+    "median": 24.515301344262525,
+    "min": 2,
+    "samples": 430,
+  },
+  "slug": "subway",
+  "spawnSafety": [
+    {
+      "nearestPlayerDist": 26.92582403567252,
+      "obstructed": true,
+      "reason": "obstructed by cover between spawn and player",
+      "safe": true,
+      "spawn": [
+        -30,
+        0,
+        -30,
+      ],
+    },
+    {
+      "nearestPlayerDist": 31.63858403911275,
+      "obstructed": false,
+      "reason": "outside spawn-camp distance",
+      "safe": true,
+      "spawn": [
+        30,
+        0,
+        -30,
+      ],
+    },
+    {
+      "nearestPlayerDist": 30.187580227636662,
+      "obstructed": false,
+      "reason": "outside spawn-camp distance",
+      "safe": true,
+      "spawn": [
+        -30,
+        0,
+        30,
+      ],
+    },
+    {
+      "nearestPlayerDist": 30.187580227636662,
+      "obstructed": false,
+      "reason": "outside spawn-camp distance",
+      "safe": true,
+      "spawn": [
+        30,
+        0,
+        30,
+      ],
+    },
+    {
+      "nearestPlayerDist": 6.082762530298219,
+      "obstructed": false,
+      "reason": "UNSAFE: clear LOS to a common player position within spawn-camp range",
+      "safe": false,
+      "spawn": [
+        0,
+        0,
+        -34,
+      ],
+    },
+  ],
+  "totalCover": 38,
+  "verticality": {
+    "isMultiLevel": true,
+    "levels": [
+      3,
+      4,
+      10,
+    ],
+    "verticalPropCount": 18,
+  },
+}
+`;
+
+exports[`MapValidator snapshots (one per registered map) frostbite: matches committed snapshot 1`] = `
+{
+  "boundary": {
+    "ok": false,
+    "outOfBoundsProps": [
+      {
+        "position": [
+          0,
+          4,
+          -48,
+        ],
+        "type": "box",
+      },
+      {
+        "position": [
+          0,
+          4,
+          48,
+        ],
+        "type": "box",
+      },
+      {
+        "position": [
+          -48,
+          4,
+          0,
+        ],
+        "type": "box",
+      },
+      {
+        "position": [
+          48,
+          4,
+          0,
+        ],
+        "type": "box",
+      },
+    ],
+    "outOfBoundsSpawns": [],
+  },
+  "bounds": 48,
+  "coverDensity": [
+    {
+      "count": 1,
+      "max": 20,
+      "min": 3,
+      "ok": false,
+      "verdict": "sparse",
+      "zone": "NW",
+    },
+    {
+      "count": 7,
+      "max": 20,
+      "min": 3,
+      "ok": true,
+      "verdict": "ok",
+      "zone": "W",
+    },
+    {
+      "count": 2,
+      "max": 20,
+      "min": 3,
+      "ok": false,
+      "verdict": "sparse",
+      "zone": "SW",
+    },
+    {
+      "count": 4,
+      "max": 20,
+      "min": 3,
+      "ok": true,
+      "verdict": "ok",
+      "zone": "N",
+    },
+    {
+      "count": 7,
+      "max": 20,
+      "min": 3,
+      "ok": true,
+      "verdict": "ok",
+      "zone": "C",
+    },
+    {
+      "count": 2,
+      "max": 20,
+      "min": 3,
+      "ok": false,
+      "verdict": "sparse",
+      "zone": "S",
+    },
+    {
+      "count": 1,
+      "max": 20,
+      "min": 3,
+      "ok": false,
+      "verdict": "sparse",
+      "zone": "NE",
+    },
+    {
+      "count": 6,
+      "max": 20,
+      "min": 3,
+      "ok": true,
+      "verdict": "ok",
+      "zone": "E",
+    },
+    {
+      "count": 1,
+      "max": 20,
+      "min": 3,
+      "ok": false,
+      "verdict": "sparse",
+      "zone": "SE",
+    },
+  ],
+  "issues": [
+    "Spawn 0,0,-42 is inside the spawn-camp hard floor (6.1m < 8m) — obstruction is not a reliable defense.",
+    "Spawn 0,0,-42 has clear LOS to a common player position (6.1m away).",
+    "Zone NW cover count 1 is sparse (target 3..20).",
+    "Zone SW cover count 2 is sparse (target 3..20).",
+    "Zone S cover count 2 is sparse (target 3..20).",
+    "Zone NE cover count 1 is sparse (target 3..20).",
+    "Zone SE cover count 1 is sparse (target 3..20).",
+    "Spawn -38,0,-38 is embedded inside a comms_tower AABB — enemies will spawn stuck.",
+    "Spawn 38,0,38 is embedded inside a comms_tower AABB — enemies will spawn stuck.",
+    "Boundary: 0 OOB spawns, 4 OOB props (outside ±46m).",
+  ],
+  "navmesh": {
+    "gaps": [],
+    "ok": true,
+    "reachableCells": 525,
+    "totalCells": 576,
+  },
+  "objectiveZones": [
+    {
+      "mode": "SURVIVAL",
+      "positions": [
+        [
+          0,
+          0,
+          0,
+        ],
+      ],
+      "radius": 48,
+      "type": "survival_arena",
+    },
+    {
+      "mode": "HORDE",
+      "positions": [
+        [
+          0,
+          0,
+          0,
+        ],
+      ],
+      "radius": 19.200000000000003,
+      "type": "horde_rally",
+    },
+    {
+      "mode": "EXTRACTION",
+      "positions": [
+        [
+          -28.799999999999997,
+          0,
+          -28.799999999999997,
+        ],
+        [
+          28.799999999999997,
+          0,
+          28.799999999999997,
+        ],
+      ],
+      "radius": 3,
+      "type": "extraction_zone",
+    },
+    {
+      "mode": "VIP",
+      "positions": [
+        [
+          0,
+          0,
+          12,
+        ],
+        [
+          -15,
+          0,
+          0,
+        ],
+        [
+          0,
+          0,
+          -12,
+        ],
+        [
+          15,
+          0,
+          0,
+        ],
+      ],
+      "type": "vip_waypoints",
+    },
+  ],
+  "ok": false,
+  "respawnZones": [
+    {
+      "spawn": [
+        -38,
+        0,
+        -38,
+      ],
+      "stuck": true,
+      "stuckIn": "comms_tower",
+    },
+    {
+      "spawn": [
+        38,
+        0,
+        -38,
+      ],
+      "stuck": false,
+    },
+    {
+      "spawn": [
+        -38,
+        0,
+        38,
+      ],
+      "stuck": false,
+    },
+    {
+      "spawn": [
+        38,
+        0,
+        38,
+      ],
+      "stuck": true,
+      "stuckIn": "comms_tower",
+    },
+    {
+      "spawn": [
+        0,
+        0,
+        -42,
+      ],
+      "stuck": false,
+    },
+    {
+      "spawn": [
+        -30,
+        0,
+        0,
+      ],
+      "stuck": false,
+    },
+    {
+      "spawn": [
+        30,
+        0,
+        0,
+      ],
+      "stuck": false,
+    },
+  ],
+  "sightlineLength": {
+    "bucketEdges": [
+      14.4,
+      28.8,
+      43.2,
+      57.6,
+      72,
+      86.4,
+      100.8,
+      115.2,
+    ],
+    "distribution": [
+      36,
+      122,
+      103,
+      52,
+      39,
+      7,
+      2,
+      0,
+    ],
+    "max": 94.02127418834527,
+    "mean": 34.86645378756816,
+    "median": 31.622776601683793,
+    "min": 5,
+    "samples": 361,
+  },
+  "slug": "frostbite",
+  "spawnSafety": [
+    {
+      "nearestPlayerDist": 39.30648801406709,
+      "obstructed": false,
+      "reason": "far from common player positions",
+      "safe": true,
+      "spawn": [
+        -38,
+        0,
+        -38,
+      ],
+    },
+    {
+      "nearestPlayerDist": 39.30648801406709,
+      "obstructed": false,
+      "reason": "far from common player positions",
+      "safe": true,
+      "spawn": [
+        38,
+        0,
+        -38,
+      ],
+    },
+    {
+      "nearestPlayerDist": 38.56539899962141,
+      "obstructed": false,
+      "reason": "far from common player positions",
+      "safe": true,
+      "spawn": [
+        -38,
+        0,
+        38,
+      ],
+    },
+    {
+      "nearestPlayerDist": 38.56539899962141,
+      "obstructed": false,
+      "reason": "far from common player positions",
+      "safe": true,
+      "spawn": [
+        38,
+        0,
+        38,
+      ],
+    },
+    {
+      "nearestPlayerDist": 6.082762530298219,
+      "obstructed": false,
+      "reason": "UNSAFE: clear LOS to a common player position within spawn-camp range",
+      "safe": false,
+      "spawn": [
+        0,
+        0,
+        -42,
+      ],
+    },
+    {
+      "nearestPlayerDist": 18.027756377319946,
+      "obstructed": false,
+      "reason": "outside spawn-camp distance",
+      "safe": true,
+      "spawn": [
+        -30,
+        0,
+        0,
+      ],
+    },
+    {
+      "nearestPlayerDist": 18.027756377319946,
+      "obstructed": false,
+      "reason": "outside spawn-camp distance",
+      "safe": true,
+      "spawn": [
+        30,
+        0,
+        0,
+      ],
+    },
+  ],
+  "totalCover": 33,
+  "verticality": {
+    "isMultiLevel": true,
+    "levels": [
+      4,
+      5,
+      8,
+      12,
+    ],
+    "verticalPropCount": 14,
+  },
+}
+`;
+
+exports[`MapValidator snapshots (one per registered map) verdant_ruin: matches committed snapshot 1`] = `
+{
+  "boundary": {
+    "ok": false,
+    "outOfBoundsProps": [
+      {
+        "position": [
+          0,
+          4,
+          -52,
+        ],
+        "type": "box",
+      },
+      {
+        "position": [
+          0,
+          4,
+          52,
+        ],
+        "type": "box",
+      },
+      {
+        "position": [
+          -52,
+          4,
+          0,
+        ],
+        "type": "box",
+      },
+      {
+        "position": [
+          52,
+          4,
+          0,
+        ],
+        "type": "box",
+      },
+    ],
+    "outOfBoundsSpawns": [],
+  },
+  "bounds": 52,
+  "coverDensity": [
+    {
+      "count": 2,
+      "max": 20,
+      "min": 3,
+      "ok": false,
+      "verdict": "sparse",
+      "zone": "NW",
+    },
+    {
+      "count": 4,
+      "max": 20,
+      "min": 3,
+      "ok": true,
+      "verdict": "ok",
+      "zone": "W",
+    },
+    {
+      "count": 2,
+      "max": 20,
+      "min": 3,
+      "ok": false,
+      "verdict": "sparse",
+      "zone": "SW",
+    },
+    {
+      "count": 2,
+      "max": 20,
+      "min": 3,
+      "ok": false,
+      "verdict": "sparse",
+      "zone": "N",
+    },
+    {
+      "count": 9,
+      "max": 20,
+      "min": 3,
+      "ok": true,
+      "verdict": "ok",
+      "zone": "C",
+    },
+    {
+      "count": 0,
+      "max": 20,
+      "min": 3,
+      "ok": false,
+      "verdict": "sparse",
+      "zone": "S",
+    },
+    {
+      "count": 2,
+      "max": 20,
+      "min": 3,
+      "ok": false,
+      "verdict": "sparse",
+      "zone": "NE",
+    },
+    {
+      "count": 3,
+      "max": 20,
+      "min": 3,
+      "ok": true,
+      "verdict": "ok",
+      "zone": "E",
+    },
+    {
+      "count": 2,
+      "max": 20,
+      "min": 3,
+      "ok": false,
+      "verdict": "sparse",
+      "zone": "SE",
+    },
+  ],
+  "issues": [
+    "Spawn 0,0,-46 is inside the spawn-camp hard floor (6.1m < 8m) — obstruction is not a reliable defense.",
+    "Spawn 0,0,-46 has clear LOS to a common player position (6.1m away).",
+    "Zone NW cover count 2 is sparse (target 3..20).",
+    "Zone SW cover count 2 is sparse (target 3..20).",
+    "Zone N cover count 2 is sparse (target 3..20).",
+    "Zone S cover count 0 is sparse (target 3..20).",
+    "Zone NE cover count 2 is sparse (target 3..20).",
+    "Zone SE cover count 2 is sparse (target 3..20).",
+    "Boundary: 0 OOB spawns, 4 OOB props (outside ±50m).",
+  ],
+  "navmesh": {
+    "gaps": [],
+    "ok": true,
+    "reachableCells": 610,
+    "totalCells": 676,
+  },
+  "objectiveZones": [
+    {
+      "mode": "SURVIVAL",
+      "positions": [
+        [
+          0,
+          0,
+          0,
+        ],
+      ],
+      "radius": 52,
+      "type": "survival_arena",
+    },
+    {
+      "mode": "HORDE",
+      "positions": [
+        [
+          0,
+          0,
+          0,
+        ],
+      ],
+      "radius": 20.8,
+      "type": "horde_rally",
+    },
+    {
+      "mode": "EXTRACTION",
+      "positions": [
+        [
+          -31.2,
+          0,
+          -31.2,
+        ],
+        [
+          31.2,
+          0,
+          31.2,
+        ],
+      ],
+      "radius": 3,
+      "type": "extraction_zone",
+    },
+    {
+      "mode": "ZOMBIES",
+      "positions": [
+        [
+          0,
+          0,
+          0,
+        ],
+      ],
+      "radius": 20.8,
+      "type": "zombies_rally",
+    },
+  ],
+  "ok": false,
+  "respawnZones": [
+    {
+      "spawn": [
+        -42,
+        0,
+        -42,
+      ],
+      "stuck": false,
+    },
+    {
+      "spawn": [
+        42,
+        0,
+        -42,
+      ],
+      "stuck": false,
+    },
+    {
+      "spawn": [
+        -42,
+        0,
+        42,
+      ],
+      "stuck": false,
+    },
+    {
+      "spawn": [
+        42,
+        0,
+        42,
+      ],
+      "stuck": false,
+    },
+    {
+      "spawn": [
+        0,
+        0,
+        -46,
+      ],
+      "stuck": false,
+    },
+    {
+      "spawn": [
+        -30,
+        0,
+        -10,
+      ],
+      "stuck": false,
+    },
+    {
+      "spawn": [
+        30,
+        0,
+        10,
+      ],
+      "stuck": false,
+    },
+  ],
+  "sightlineLength": {
+    "bucketEdges": [
+      15.6,
+      31.2,
+      46.8,
+      62.4,
+      78,
+      93.6,
+      109.2,
+      124.8,
+    ],
+    "distribution": [
+      36,
+      52,
+      69,
+      30,
+      8,
+      12,
+      0,
+      0,
+    ],
+    "max": 87.31551981177229,
+    "mean": 36.23316497755772,
+    "median": 36.796738985948195,
+    "min": 7.0710678118654755,
+    "samples": 207,
+  },
+  "slug": "verdant_ruin",
+  "spawnSafety": [
+    {
+      "nearestPlayerDist": 43.18564576337837,
+      "obstructed": false,
+      "reason": "far from common player positions",
+      "safe": true,
+      "spawn": [
+        -42,
+        0,
+        -42,
+      ],
+    },
+    {
+      "nearestPlayerDist": 43.18564576337837,
+      "obstructed": false,
+      "reason": "far from common player positions",
+      "safe": true,
+      "spawn": [
+        42,
+        0,
+        -42,
+      ],
+    },
+    {
+      "nearestPlayerDist": 42.840284779632356,
+      "obstructed": false,
+      "reason": "far from common player positions",
+      "safe": true,
+      "spawn": [
+        -42,
+        0,
+        42,
+      ],
+    },
+    {
+      "nearestPlayerDist": 42.840284779632356,
+      "obstructed": false,
+      "reason": "far from common player positions",
+      "safe": true,
+      "spawn": [
+        42,
+        0,
+        42,
+      ],
+    },
+    {
+      "nearestPlayerDist": 6.082762530298219,
+      "obstructed": false,
+      "reason": "UNSAFE: clear LOS to a common player position within spawn-camp range",
+      "safe": false,
+      "spawn": [
+        0,
+        0,
+        -46,
+      ],
+    },
+    {
+      "nearestPlayerDist": 24.186773244895647,
+      "obstructed": false,
+      "reason": "outside spawn-camp distance",
+      "safe": true,
+      "spawn": [
+        -30,
+        0,
+        -10,
+      ],
+    },
+    {
+      "nearestPlayerDist": 24.186773244895647,
+      "obstructed": false,
+      "reason": "outside spawn-camp distance",
+      "safe": true,
+      "spawn": [
+        30,
+        0,
+        10,
+      ],
+    },
+  ],
+  "totalCover": 28,
+  "verticality": {
+    "isMultiLevel": true,
+    "levels": [
+      4,
+      6,
+      8,
+    ],
+    "verticalPropCount": 20,
+  },
+}
+`;
+
+exports[`MapValidator snapshots (one per registered map) tidal_lock: matches committed snapshot 1`] = `
+{
+  "boundary": {
+    "ok": false,
+    "outOfBoundsProps": [
+      {
+        "position": [
+          0,
+          4,
+          -50,
+        ],
+        "type": "box",
+      },
+      {
+        "position": [
+          -50,
+          4,
+          0,
+        ],
+        "type": "box",
+      },
+      {
+        "position": [
+          50,
+          4,
+          0,
+        ],
+        "type": "box",
+      },
+    ],
+    "outOfBoundsSpawns": [],
+  },
+  "bounds": 50,
+  "coverDensity": [
+    {
+      "count": 2,
+      "max": 20,
+      "min": 3,
+      "ok": false,
+      "verdict": "sparse",
+      "zone": "NW",
+    },
+    {
+      "count": 5,
+      "max": 20,
+      "min": 3,
+      "ok": true,
+      "verdict": "ok",
+      "zone": "W",
+    },
+    {
+      "count": 2,
+      "max": 20,
+      "min": 3,
+      "ok": false,
+      "verdict": "sparse",
+      "zone": "SW",
+    },
+    {
+      "count": 2,
+      "max": 20,
+      "min": 3,
+      "ok": false,
+      "verdict": "sparse",
+      "zone": "N",
+    },
+    {
+      "count": 7,
+      "max": 20,
+      "min": 3,
+      "ok": true,
+      "verdict": "ok",
+      "zone": "C",
+    },
+    {
+      "count": 3,
+      "max": 20,
+      "min": 3,
+      "ok": true,
+      "verdict": "ok",
+      "zone": "S",
+    },
+    {
+      "count": 3,
+      "max": 20,
+      "min": 3,
+      "ok": true,
+      "verdict": "ok",
+      "zone": "NE",
+    },
+    {
+      "count": 5,
+      "max": 20,
+      "min": 3,
+      "ok": true,
+      "verdict": "ok",
+      "zone": "E",
+    },
+    {
+      "count": 0,
+      "max": 20,
+      "min": 3,
+      "ok": false,
+      "verdict": "sparse",
+      "zone": "SE",
+    },
+  ],
+  "issues": [
+    "Spawn 0,0,-44 is inside the spawn-camp hard floor (6.1m < 8m) — obstruction is not a reliable defense.",
+    "Spawn 0,0,-44 has clear LOS to a common player position (6.1m away).",
+    "Zone NW cover count 2 is sparse (target 3..20).",
+    "Zone SW cover count 2 is sparse (target 3..20).",
+    "Zone N cover count 2 is sparse (target 3..20).",
+    "Zone SE cover count 0 is sparse (target 3..20).",
+    "Spawn -40,0,-40 is embedded inside a car AABB — enemies will spawn stuck.",
+    "Boundary: 0 OOB spawns, 3 OOB props (outside ±48m).",
+  ],
+  "navmesh": {
+    "gaps": [],
+    "ok": true,
+    "reachableCells": 574,
+    "totalCells": 625,
+  },
+  "objectiveZones": [
+    {
+      "mode": "SURVIVAL",
+      "positions": [
+        [
+          0,
+          0,
+          0,
+        ],
+      ],
+      "radius": 50,
+      "type": "survival_arena",
+    },
+    {
+      "mode": "HORDE",
+      "positions": [
+        [
+          0,
+          0,
+          0,
+        ],
+      ],
+      "radius": 20,
+      "type": "horde_rally",
+    },
+    {
+      "mode": "EXTRACTION",
+      "positions": [
+        [
+          -30,
+          0,
+          -30,
+        ],
+        [
+          30,
+          0,
+          30,
+        ],
+      ],
+      "radius": 3,
+      "type": "extraction_zone",
+    },
+    {
+      "mode": "VIP",
+      "positions": [
+        [
+          0,
+          0,
+          12,
+        ],
+        [
+          -15,
+          0,
+          0,
+        ],
+        [
+          0,
+          0,
+          -12,
+        ],
+        [
+          15,
+          0,
+          0,
+        ],
+      ],
+      "type": "vip_waypoints",
+    },
+  ],
+  "ok": false,
+  "respawnZones": [
+    {
+      "spawn": [
+        -40,
+        0,
+        -40,
+      ],
+      "stuck": true,
+      "stuckIn": "car",
+    },
+    {
+      "spawn": [
+        40,
+        0,
+        -40,
+      ],
+      "stuck": false,
+    },
+    {
+      "spawn": [
+        -40,
+        0,
+        40,
+      ],
+      "stuck": false,
+    },
+    {
+      "spawn": [
+        40,
+        0,
+        40,
+      ],
+      "stuck": false,
+    },
+    {
+      "spawn": [
+        0,
+        0,
+        -44,
+      ],
+      "stuck": false,
+    },
+    {
+      "spawn": [
+        -30,
+        0,
+        0,
+      ],
+      "stuck": false,
+    },
+    {
+      "spawn": [
+        30,
+        0,
+        0,
+      ],
+      "stuck": false,
+    },
+  ],
+  "sightlineLength": {
+    "bucketEdges": [
+      15,
+      30,
+      45,
+      60,
+      75,
+      90,
+      105,
+      120,
+    ],
+    "distribution": [
+      25,
+      83,
+      74,
+      40,
+      20,
+      8,
+      3,
+      0,
+    ],
+    "max": 98.48857801796105,
+    "mean": 36.05861849236299,
+    "median": 32.38826948140329,
+    "min": 6.4031242374328485,
+    "samples": 253,
+  },
+  "slug": "tidal_lock",
+  "spawnSafety": [
+    {
+      "nearestPlayerDist": 22.38302928559939,
+      "obstructed": false,
+      "reason": "outside spawn-camp distance",
+      "safe": true,
+      "spawn": [
+        -40,
+        0,
+        -40,
+      ],
+    },
+    {
+      "nearestPlayerDist": 41.24318125460256,
+      "obstructed": false,
+      "reason": "far from common player positions",
+      "safe": true,
+      "spawn": [
+        40,
+        0,
+        -40,
+      ],
+    },
+    {
+      "nearestPlayerDist": 41.24318125460256,
+      "obstructed": false,
+      "reason": "far from common player positions",
+      "safe": true,
+      "spawn": [
+        -40,
+        0,
+        40,
+      ],
+    },
+    {
+      "nearestPlayerDist": 41.24318125460256,
+      "obstructed": false,
+      "reason": "far from common player positions",
+      "safe": true,
+      "spawn": [
+        40,
+        0,
+        40,
+      ],
+    },
+    {
+      "nearestPlayerDist": 6.082762530298219,
+      "obstructed": false,
+      "reason": "UNSAFE: clear LOS to a common player position within spawn-camp range",
+      "safe": false,
+      "spawn": [
+        0,
+        0,
+        -44,
+      ],
+    },
+    {
+      "nearestPlayerDist": 20.024984394500787,
+      "obstructed": false,
+      "reason": "outside spawn-camp distance",
+      "safe": true,
+      "spawn": [
+        -30,
+        0,
+        0,
+      ],
+    },
+    {
+      "nearestPlayerDist": 20.024984394500787,
+      "obstructed": false,
+      "reason": "outside spawn-camp distance",
+      "safe": true,
+      "spawn": [
+        30,
+        0,
+        0,
+      ],
+    },
+  ],
+  "totalCover": 29,
+  "verticality": {
+    "isMultiLevel": true,
+    "levels": [
+      4,
+      5,
+      6,
+      8,
+      12,
+    ],
+    "verticalPropCount": 11,
+  },
+}
+`;
+
+exports[`MapValidator snapshots (one per registered map) ember_yard: matches committed snapshot 1`] = `
+{
+  "boundary": {
+    "ok": false,
+    "outOfBoundsProps": [
+      {
+        "position": [
+          0,
+          8,
+          -46,
+        ],
+        "type": "box",
+      },
+      {
+        "position": [
+          0,
+          8,
+          46,
+        ],
+        "type": "box",
+      },
+      {
+        "position": [
+          -46,
+          8,
+          0,
+        ],
+        "type": "box",
+      },
+      {
+        "position": [
+          46,
+          8,
+          0,
+        ],
+        "type": "box",
+      },
+    ],
+    "outOfBoundsSpawns": [],
+  },
+  "bounds": 46,
+  "coverDensity": [
+    {
+      "count": 2,
+      "max": 20,
+      "min": 3,
+      "ok": false,
+      "verdict": "sparse",
+      "zone": "NW",
+    },
+    {
+      "count": 3,
+      "max": 20,
+      "min": 3,
+      "ok": true,
+      "verdict": "ok",
+      "zone": "W",
+    },
+    {
+      "count": 4,
+      "max": 20,
+      "min": 3,
+      "ok": true,
+      "verdict": "ok",
+      "zone": "SW",
+    },
+    {
+      "count": 2,
+      "max": 20,
+      "min": 3,
+      "ok": false,
+      "verdict": "sparse",
+      "zone": "N",
+    },
+    {
+      "count": 11,
+      "max": 20,
+      "min": 3,
+      "ok": true,
+      "verdict": "ok",
+      "zone": "C",
+    },
+    {
+      "count": 0,
+      "max": 20,
+      "min": 3,
+      "ok": false,
+      "verdict": "sparse",
+      "zone": "S",
+    },
+    {
+      "count": 3,
+      "max": 20,
+      "min": 3,
+      "ok": true,
+      "verdict": "ok",
+      "zone": "NE",
+    },
+    {
+      "count": 2,
+      "max": 20,
+      "min": 3,
+      "ok": false,
+      "verdict": "sparse",
+      "zone": "E",
+    },
+    {
+      "count": 2,
+      "max": 20,
+      "min": 3,
+      "ok": false,
+      "verdict": "sparse",
+      "zone": "SE",
+    },
+  ],
+  "issues": [
+    "Spawn 0,0,-42 is inside the spawn-camp hard floor (4.1m < 8m) — obstruction is not a reliable defense.",
+    "Spawn 0,0,-42 has clear LOS to a common player position (4.1m away).",
+    "Zone NW cover count 2 is sparse (target 3..20).",
+    "Zone N cover count 2 is sparse (target 3..20).",
+    "Zone S cover count 0 is sparse (target 3..20).",
+    "Zone E cover count 2 is sparse (target 3..20).",
+    "Zone SE cover count 2 is sparse (target 3..20).",
+    "Boundary: 0 OOB spawns, 4 OOB props (outside ±44m).",
+  ],
+  "navmesh": {
+    "gaps": [],
+    "ok": true,
+    "reachableCells": 371,
+    "totalCells": 529,
+  },
+  "objectiveZones": [
+    {
+      "mode": "SURVIVAL",
+      "positions": [
+        [
+          0,
+          0,
+          0,
+        ],
+      ],
+      "radius": 46,
+      "type": "survival_arena",
+    },
+    {
+      "mode": "HORDE",
+      "positions": [
+        [
+          0,
+          0,
+          0,
+        ],
+      ],
+      "radius": 18.400000000000002,
+      "type": "horde_rally",
+    },
+    {
+      "mode": "BREACH",
+      "positions": [
+        [
+          -25,
+          0,
+          -25,
+        ],
+        [
+          25,
+          0,
+          -25,
+        ],
+        [
+          -25,
+          0,
+          25,
+        ],
+        [
+          25,
+          0,
+          25,
+        ],
+        [
+          0,
+          0,
+          0,
+        ],
+      ],
+      "type": "breach_rooms",
+    },
+    {
+      "mode": "VIP",
+      "positions": [
+        [
+          0,
+          0,
+          12,
+        ],
+        [
+          -15,
+          0,
+          0,
+        ],
+        [
+          0,
+          0,
+          -12,
+        ],
+        [
+          15,
+          0,
+          0,
+        ],
+      ],
+      "type": "vip_waypoints",
+    },
+  ],
+  "ok": false,
+  "respawnZones": [
+    {
+      "spawn": [
+        -38,
+        0,
+        -38,
+      ],
+      "stuck": false,
+    },
+    {
+      "spawn": [
+        38,
+        0,
+        -38,
+      ],
+      "stuck": false,
+    },
+    {
+      "spawn": [
+        -38,
+        0,
+        38,
+      ],
+      "stuck": false,
+    },
+    {
+      "spawn": [
+        38,
+        0,
+        38,
+      ],
+      "stuck": false,
+    },
+    {
+      "spawn": [
+        0,
+        0,
+        -42,
+      ],
+      "stuck": false,
+    },
+    {
+      "spawn": [
+        -25,
+        0,
+        -10,
+      ],
+      "stuck": false,
+    },
+    {
+      "spawn": [
+        25,
+        0,
+        10,
+      ],
+      "stuck": false,
+    },
+  ],
+  "sightlineLength": {
+    "bucketEdges": [
+      13.8,
+      27.6,
+      41.4,
+      55.2,
+      69,
+      82.8,
+      96.6,
+      110.4,
+    ],
+    "distribution": [
+      42,
+      67,
+      56,
+      36,
+      10,
+      2,
+      0,
+      0,
+    ],
+    "max": 75.27283706623525,
+    "mean": 28.638001628364968,
+    "median": 26,
+    "min": 5,
+    "samples": 213,
+  },
+  "slug": "ember_yard",
+  "spawnSafety": [
+    {
+      "nearestPlayerDist": 38.84584919911006,
+      "obstructed": false,
+      "reason": "far from common player positions",
+      "safe": true,
+      "spawn": [
+        -38,
+        0,
+        -38,
+      ],
+    },
+    {
+      "nearestPlayerDist": 38.84584919911006,
+      "obstructed": false,
+      "reason": "far from common player positions",
+      "safe": true,
+      "spawn": [
+        38,
+        0,
+        -38,
+      ],
+    },
+    {
+      "nearestPlayerDist": 38.84584919911006,
+      "obstructed": false,
+      "reason": "far from common player positions",
+      "safe": true,
+      "spawn": [
+        -38,
+        0,
+        38,
+      ],
+    },
+    {
+      "nearestPlayerDist": 38.84584919911006,
+      "obstructed": false,
+      "reason": "far from common player positions",
+      "safe": true,
+      "spawn": [
+        38,
+        0,
+        38,
+      ],
+    },
+    {
+      "nearestPlayerDist": 4.123105625617661,
+      "obstructed": false,
+      "reason": "UNSAFE: clear LOS to a common player position within spawn-camp range",
+      "safe": false,
+      "spawn": [
+        0,
+        0,
+        -42,
+      ],
+    },
+    {
+      "nearestPlayerDist": 23.280893453645632,
+      "obstructed": false,
+      "reason": "outside spawn-camp distance",
+      "safe": true,
+      "spawn": [
+        -25,
+        0,
+        -10,
+      ],
+    },
+    {
+      "nearestPlayerDist": 23.280893453645632,
+      "obstructed": false,
+      "reason": "outside spawn-camp distance",
+      "safe": true,
+      "spawn": [
+        25,
+        0,
+        10,
+      ],
+    },
+  ],
+  "totalCover": 31,
+  "verticality": {
+    "isMultiLevel": true,
+    "levels": [
+      3,
+      4,
+      5,
+      6,
+      12,
+      16,
+    ],
+    "verticalPropCount": 20,
+  },
+}
+`;

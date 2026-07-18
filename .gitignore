@@ -1,0 +1,39 @@
+# dependencies
+node_modules/
+functions/node_modules/
+
+# env / secrets — never commit these
+.env
+.env.local
+.env.*.local
+
+# Next.js build output
+.next/
+out/
+
+# Prisma local dev database
+prisma/*.db
+prisma/*.db-journal
+
+# Cloud Functions build output
+functions/lib/
+
+# Vercel / Firebase CLI local state
+.vercel/
+.firebase/
+firebase-debug.log
+firestore-debug.log
+ui-debug.log
+pubsub-debug.log
+
+# test artifacts
+coverage/
+playwright-report/
+test-results/
+
+# misc
+*.tsbuildinfo
+npm-debug.log*
+.DS_Store
+Thumbs.db
+server.log

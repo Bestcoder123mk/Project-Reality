@@ -1,0 +1,8 @@
+node_modules/
+lib/
+.runtime-config.json
+firebase-debug.log
+ui-debug.log
+*.log
+.env
+.env.local

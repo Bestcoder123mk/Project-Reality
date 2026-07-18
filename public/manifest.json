@@ -1,0 +1,13 @@
+{
+  "name": "Project Reality",
+  "short_name": "PR",
+  "description": "Tactical Browser FPS",
+  "start_url": "/",
+  "display": "fullscreen",
+  "orientation": "landscape",
+  "background_color": "#08090c",
+  "theme_color": "#08090c",
+  "icons": [
+    { "src": "/logo.svg", "sizes": "any", "type": "image/svg+xml", "purpose": "any maskable" }
+  ]
+}

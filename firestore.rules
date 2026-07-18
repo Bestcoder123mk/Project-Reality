@@ -1,0 +1,193 @@
+rules_version = '2';
+
+// ============================================================================
+// Project Reality — Firestore Security Rules
+// ----------------------------------------------------------------------------
+// Section I (Firebase & Backend)
+//
+// Model:
+//   players/{uid}                    — public profile (read: world, write: owner)
+//   players/{uid}/inventory/{slug}   — owned items (read: owner, write: owner)
+//   battlepass/{uid_season}          — battle pass progress (read: owner)
+//   matches/{matchId}                — match history (read: world, write: server)
+//   clans/{clanId}                   — public clan info (read: world, write: leader)
+//   clans/{clanId}/members/{uid}     — membership (read: clan, write: leader)
+//   leaderboard/{seasonId}           — public read, server-only write
+//   experiments/{experimentKey}      — public read, server-only write
+//
+// Server-side writes (Cloud Functions, Admin SDK) bypass these rules. The
+// rules below apply to direct client SDK reads/writes.
+// ============================================================================
+
+service cloud.firestore {
+  match /databases/{database}/documents {
+
+    // ─── Helper functions ────────────────────────────────────────────────
+
+    // True when the caller is signed-in (any provider — Google or anonymous).
+    function isSignedIn() {
+      return request.auth != null;
+    }
+
+    // True when the caller's uid matches the doc uid.
+    function isOwner(uid) {
+      return isSignedIn() && request.auth.uid == uid;
+    }
+
+    // True when the request comes from the Firebase Admin SDK (Cloud
+    // Functions). The Admin SDK bypasses rules entirely; this is here for
+    // documentation + as a guard for the few cases where a rule wants to
+    // distinguish admin-initiated writes from client-initiated writes.
+    function isServer() {
+      return false; // Admin SDK always bypasses rules; this is unreachable.
+    }
+
+    // Validate the player doc shape on write.
+    function isValidPlayer(data) {
+      return data.keys().hasAll(['uid', 'displayName', 'credits', 'level', 'xp'])
+        && data.uid is string
+        && data.displayName is string
+        && (data.credits is int || data.credits is float)
+        && data.level is int
+        && (data.xp is int || data.xp is float);
+    }
+
+    // ─── players/{uid} ───────────────────────────────────────────────────
+    //
+    // Public profile + stats. Anyone can read (the leaderboard / clan roster
+    // needs to surface display names + levels). Only the owner can write —
+    // currency/XP mutations happen via Cloud Functions (server-side).
+
+    match /players/{uid} {
+      allow read: if true;
+      // Owner may create/update their own doc, but the server-side fields
+      // (credits, level, xp) are validated server-side by Cloud Functions.
+      // The client can only patch display fields.
+      allow create: if isOwner(uid)
+                    && isValidPlayer(resource.data);
+      allow update: if isOwner(uid)
+                    && request.resource.data.diff(resource.data)
+                       .affectedKeys()
+                       .hasOnly(['displayName', 'photoURL', 'lastSavedAt', 'updatedAt', 'schemaVersion']);
+      allow delete: if isOwner(uid);
+
+      // ─── players/{uid}/inventory/{slug} ──────────────────────────────
+      // Owned items. Owner-only read/write. The client may add items that
+      // were granted by a purchase (validated server-side via Cloud
+      // Functions; the rule here is permissive but the server is the
+      // authoritative grantor).
+      match /inventory/{slug} {
+        allow read: if isOwner(uid);
+        allow write: if isOwner(uid);
+        allow delete: if isOwner(uid);
+      }
+    }
+
+    // ─── battlepass/{uid_season} ────────────────────────────────────────
+    //
+    // Battle pass progress. The doc id is `${uid}_${season}` so a player's
+    // progress is partitioned per season. Only the owner can read; writes
+    // come from the server (Cloud Functions that process match results +
+    // award XP). The client can update `premium` (when the player buys
+    // premium via the shop) but cannot change `xp` or `tier` directly.
+
+    match /battlepass/{docId} {
+      allow read: if isSignedIn()
+                  && docId.matches(request.auth.uid + '_[0-9]+');
+      allow create: if isSignedIn()
+                    && request.resource.data.uid == request.auth.uid;
+      allow update: if isSignedIn()
+                    && resource.data.uid == request.auth.uid
+                    && request.resource.data.diff(resource.data)
+                       .affectedKeys()
+                       .hasOnly(['premium', 'claimedTiers', 'updatedAt']);
+      allow delete: if false; // never — battle pass history is immutable.
+    }
+
+    // ─── matches/{matchId} ──────────────────────────────────────────────
+    //
+    // Match history. Write-once (server creates on match end). Anyone can
+    // read (the leaderboard + match recap need to surface other players'
+    // results). The client never writes here.
+
+    match /matches/{matchId} {
+      allow read: if true;
+      allow create: if false; // only Cloud Functions write.
+      allow update: if false; // immutable.
+      allow delete: if false; // immutable.
+    }
+
+    // ─── clans/{clanId} ─────────────────────────────────────────────────
+    //
+    // Public clan info. Anyone can read. Only the leader can write the clan
+    // doc. Members join/leave via the members subcollection.
+
+    match /clans/{clanId} {
+      allow read: if true;
+      allow create: if isSignedIn()
+                    && request.resource.data.leaderUid == request.auth.uid;
+      allow update: if isSignedIn()
+                    && resource.data.leaderUid == request.auth.uid;
+      allow delete: if isSignedIn()
+                    && resource.data.leaderUid == request.auth.uid;
+
+      // ─── clans/{clanId}/members/{uid} ────────────────────────────────
+      // Membership. Clan members can read the roster. The leader can add
+      // or remove members; a player can remove themselves (leave clan).
+      match /members/{uid} {
+        allow read: if isSignedIn();
+        allow create: if isSignedIn()
+                      && (request.resource.data.uid == request.auth.uid
+                          || get(/databases/$(database)/documents/clans/$(clanId)).data.leaderUid == request.auth.uid);
+        allow update: if isSignedIn()
+                      && (resource.data.uid == request.auth.uid
+                          || get(/databases/$(database)/documents/clans/$(clanId)).data.leaderUid == request.auth.uid);
+        allow delete: if isSignedIn()
+                      && (resource.data.uid == request.auth.uid
+                          || get(/databases/$(database)/documents/clans/$(clanId)).data.leaderUid == request.auth.uid);
+      }
+    }
+
+    // ─── leaderboard/{seasonId} ─────────────────────────────────────────
+    //
+    // Top-N leaderboard per season. Public read. Server-only write.
+
+    match /leaderboard/{seasonId} {
+      allow read: if true;
+      allow write: if false; // only Cloud Functions.
+    }
+
+    // ─── experiments/{experimentKey} ────────────────────────────────────
+    //
+    // Experiment metadata (description, rollout, enabled). Public read
+    // so the client can render the A/B test disclosure panel. Server-only
+    // write.
+
+    match /experiments/{experimentKey} {
+      allow read: if true;
+      allow write: if false;
+    }
+
+    // ─── audit_log/{logId} ──────────────────────────────────────────────
+    //
+    // Admin action audit log. Server-only write + read (the admin dashboard
+    // uses a server-side route that reads with the Admin SDK).
+
+    match /audit_log/{logId} {
+      allow read: if false;
+      allow write: if false;
+    }
+
+    // ─── telemetry/{eventId} ────────────────────────────────────────────
+    //
+    // Client-side telemetry events (analytics fallback). Signed-in users
+    // can append their own events; the doc uid must match the auth uid.
+
+    match /telemetry/{eventId} {
+      allow read: if false;
+      allow create: if isSignedIn()
+                    && request.resource.data.uid == request.auth.uid;
+      allow update, delete: if false;
+    }
+  }
+}

@@ -1,0 +1,52 @@
+rules_version = '2';
+
+// ============================================================================
+// Project Reality — Cloud Storage Security Rules
+// ----------------------------------------------------------------------------
+// Section I (Firebase & Backend) — wraps/skins/charms asset CDN.
+//
+// Layout:
+//   gs://project-reality-8966a.firebasestorage.app/
+//     wraps/{slug}.png                — public read (catalog), server write
+//     skins/{weaponSlug}/{slug}.png   — public read, server write
+//     charms/{slug}.png               — public read, server write
+//     operators/{slug}/preview.png    — public read, server write
+//     players/{uid}/wraps/{slug}.png  — owner write, public read
+// ============================================================================
+
+service firebase.storage {
+  match /b/{bucket}/o {
+
+    // Public catalog assets — anyone signed-in can read.
+    match /wraps/{allPaths=**} {
+      allow read: if request.auth != null;
+      allow write: if false; // server-only (CI upload).
+    }
+    match /skins/{allPaths=**} {
+      allow read: if request.auth != null;
+      allow write: if false;
+    }
+    match /charms/{allPaths=**} {
+      allow read: if request.auth != null;
+      allow write: if false;
+    }
+    match /operators/{allPaths=**} {
+      allow read: if request.auth != null;
+      allow write: if false;
+    }
+
+    // Player-uploaded community wraps — owner can write, anyone can read.
+    match /players/{uid}/wraps/{fileName} {
+      allow read: if request.auth != null;
+      allow write: if request.auth != null
+                    && request.auth.uid == uid
+                    && request.resource.contentType.matches('image/.*')
+                    && request.resource.size < 5 * 1024 * 1024; // 5MB cap.
+    }
+
+    // Default — deny everything else.
+    match /{allPaths=**} {
+      allow read, write: if false;
+    }
+  }
+}

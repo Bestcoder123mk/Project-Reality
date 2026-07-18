@@ -1,0 +1,1018 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+// --- Pre-existing models (kept untouched) ---
+
+model User {
+  id        String   @id @default(cuid())
+  email     String   @unique
+  name      String?
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model Post {
+  id        String   @id @default(cuid())
+  title     String
+  content   String?
+  published Boolean  @default(false)
+  authorId  String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+// --- Project Reality: economy / battlepass / inventory ---
+
+model Player {
+  id              String   @id @default(uuid())
+  displayName     String   @default("Operator")
+  credits         Int      @default(500)
+  level           Int      @default(1)
+  xp              Int      @default(0)
+  constructionMats Int     @default(500)
+  ammoMats        Int      @default(500)
+  fuel            Int      @default(200)
+  /** Prompt 8 — schema version for safe profile migration. */
+  schemaVersion   Int      @default(1) @map("schema_version")
+  /** L1-5000 #4501 — external account linking (Steam/PSN/Xbox). */
+  externalAccountId   String?  @map("external_account_id")
+  externalPlatform    String?  @map("external_platform")
+  createdAt       DateTime @default(now())
+  updatedAt       DateTime @updatedAt
+
+  inventory            PlayerInventory[]
+  inventoryAttachments PlayerInventoryAttachment[]
+  inventoryOperators   PlayerInventoryOperator[]
+  loadouts             PlayerLoadout[]
+  battlePass           PlayerBattlePass[]
+  matchEarnings        MatchEarning[]
+  medicalState         PlayerMedicalState?
+  medicalInventory     PlayerMedicalInventory[]
+  challenges           PlayerChallenge[]
+  replays              Replay[]
+  npcMemories          NpcMemory[]
+  dialogueLogs         DialogueLog[]
+  supplyTransactions   SupplyTransaction[]
+  operatorCustomization PlayerOperatorCustomization?
+
+  @@map("players")
+}
+
+// --- V3.1: Per-player granular operator customization (Task 29) ---
+
+model PlayerOperatorCustomization {
+  id        String   @id @default(uuid())
+  playerId  String   @unique @map("player_id")
+  /** Base operator preset slug (warden/spectre/nomad/vanguard/phantom). */
+  baseSlug  String   @default("warden") @map("base_slug")
+  /** JSON-encoded OperatorCustomizationOverrides — Partial<OperatorVisual>
+   *  + extended appearance fields + accessory toggles. */
+  overrides String   @default("{}")
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  player Player @relation(fields: [playerId], references: [id], onDelete: Cascade)
+
+  @@map("player_operator_customizations")
+}
+
+enum WeaponCategory {
+  RIFLE
+  SMG
+  PISTOL
+  SNIPER
+  SHOTGUN
+  LMG
+}
+
+enum Rarity {
+  COMMON
+  RARE
+  EPIC
+  LEGENDARY
+}
+
+model Weapon {
+  id          String         @id @default(uuid())
+  slug        String         @unique
+  name        String
+  category    WeaponCategory
+  price       Int            @default(0)
+  damage      Int
+  fireRate    Int
+  magSize     Int
+  reloadTime  Int
+  spread      Float
+  recoil      Float
+  range       Int
+  automatic   Boolean        @default(true)
+  zoom        Float          @default(1.1)
+  description String         @default("")
+  rarity      Rarity         @default(COMMON)
+  createdAt   DateTime       @default(now())
+  updatedAt   DateTime       @updatedAt
+
+  inventories PlayerInventory[]
+  loadouts    PlayerLoadout[]
+
+  @@map("weapons")
+}
+
+enum AttachmentType {
+  MUZZLE
+  SIGHT
+  GRIP
+  MAGAZINE
+}
+
+model Attachment {
+  id          String         @id @default(uuid())
+  slug        String         @unique
+  name        String
+  type        AttachmentType
+  price       Int            @default(0)
+  damageMod   Float          @default(1.0)
+  recoilMod   Float          @default(1.0)
+  spreadMod   Float          @default(1.0)
+  rangeMod    Float          @default(1.0)
+  zoomMod     Float          @default(1.0)
+  magSizeMod  Float          @default(1.0)
+  reloadMod   Float          @default(1.0)
+  description String         @default("")
+  rarity      Rarity         @default(COMMON)
+  createdAt   DateTime       @default(now())
+  updatedAt   DateTime       @updatedAt
+
+  inventories      PlayerInventoryAttachment[]
+  loadoutMuzzles   PlayerLoadout[] @relation("LoadoutMuzzle")
+  loadoutSights    PlayerLoadout[] @relation("LoadoutSight")
+  loadoutGrips     PlayerLoadout[] @relation("LoadoutGrip")
+  loadoutMagazines PlayerLoadout[] @relation("LoadoutMag")
+
+  @@map("attachments")
+}
+
+model Skin {
+  id          String   @id @default(uuid())
+  slug        String   @unique
+  name        String
+  rarity      Rarity   @default(COMMON)
+  price       Int      @default(0)
+  colorHex    String   @default("#3a3a3e")
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  inventories PlayerInventory[]
+  loadouts    PlayerLoadout[]
+
+  @@map("skins")
+}
+
+// --- V3: Operator (character) discrete-skin system ---
+
+model Operator {
+  id        String   @id @default(uuid())
+  slug      String   @unique
+  name      String
+  rarity    Rarity   @default(COMMON)
+  price     Int      @default(0)
+  /** Callsign shown in HUD / menu. */
+  callsign  String   @default("OPERATOR")
+  /** Faction / unit flavor. */
+  faction   String   @default("RECON")
+  /** Visual config JSON: { suit, accent, helmet, visor, skinTone } — consumed
+   *  by the rig builder to skin the shared skeleton. */
+  visualConfig String @default("{}")
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  inventory PlayerInventoryOperator[]
+  loadouts  PlayerLoadout[]
+
+  @@map("operators")
+}
+
+model PlayerInventoryOperator {
+  id           String   @id @default(uuid())
+  playerId     String   @map("player_id")
+  operatorSlug String   @map("operator_slug")
+  acquiredAt   DateTime @default(now())
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+
+  player   Player   @relation(fields: [playerId], references: [id], onDelete: Cascade)
+  operator Operator @relation(fields: [operatorSlug], references: [slug], onDelete: Cascade)
+
+  @@unique([playerId, operatorSlug])
+  @@index([playerId])
+  @@map("player_inventory_operators")
+}
+
+// Owned weapon or skin instance
+model PlayerInventory {
+  id         String   @id @default(uuid())
+  playerId   String   @map("player_id")
+  weaponSlug String?  @map("weapon_slug")
+  skinSlug   String?  @map("skin_slug")
+  acquiredAt DateTime @default(now())
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @updatedAt
+
+  player Player  @relation(fields: [playerId], references: [id], onDelete: Cascade)
+  weapon Weapon? @relation(fields: [weaponSlug], references: [slug], onDelete: Cascade)
+  skin   Skin?   @relation(fields: [skinSlug], references: [slug], onDelete: Cascade)
+
+  @@index([playerId])
+  @@map("player_inventory")
+}
+
+model PlayerInventoryAttachment {
+  id             String   @id @default(uuid())
+  playerId       String   @map("player_id")
+  attachmentSlug String   @map("attachment_slug")
+  acquiredAt     DateTime @default(now())
+  createdAt      DateTime @default(now())
+  updatedAt      DateTime @updatedAt
+
+  player     Player     @relation(fields: [playerId], references: [id], onDelete: Cascade)
+  attachment Attachment @relation(fields: [attachmentSlug], references: [slug], onDelete: Restrict)
+
+  @@unique([playerId, attachmentSlug])
+  @@index([playerId])
+  @@map("player_inventory_attachments")
+}
+
+// Equipped loadout config per weapon slot
+model PlayerLoadout {
+  id           String    @id @default(uuid())
+  playerId     String    @map("player_id")
+  weaponSlug   String    @map("weapon_slug")
+  muzzleSlug   String?   @map("muzzle_slug")
+  sightSlug    String?   @map("sight_slug")
+  gripSlug     String?   @map("grip_slug")
+  magazineSlug String?   @map("magazine_slug")
+  skinSlug     String?   @default("default") @map("skin_slug")
+  operatorSlug String?   @map("operator_slug")
+  isEquipped   Boolean   @default(false) @map("is_equipped")
+  createdAt    DateTime  @default(now())
+  updatedAt    DateTime  @updatedAt
+
+  player   Player      @relation(fields: [playerId], references: [id], onDelete: Cascade)
+  weapon   Weapon      @relation(fields: [weaponSlug], references: [slug], onDelete: Cascade)
+  muzzle   Attachment? @relation("LoadoutMuzzle", fields: [muzzleSlug], references: [slug], onDelete: SetNull)
+  sight    Attachment? @relation("LoadoutSight", fields: [sightSlug], references: [slug], onDelete: SetNull)
+  grip     Attachment? @relation("LoadoutGrip", fields: [gripSlug], references: [slug], onDelete: SetNull)
+  magazine Attachment? @relation("LoadoutMag", fields: [magazineSlug], references: [slug], onDelete: SetNull)
+  skin     Skin?       @relation(fields: [skinSlug], references: [slug], onDelete: SetNull)
+  operator Operator?  @relation(fields: [operatorSlug], references: [slug], onDelete: SetNull)
+
+  @@unique([playerId, weaponSlug])
+  @@index([playerId])
+  @@map("player_loadouts")
+}
+
+enum BattlePassStatus {
+  INACTIVE
+  ACTIVE
+  COMPLETED
+}
+
+model BattlePassSeason {
+  id           String   @id @default(uuid())
+  season       Int      @unique
+  name         String
+  startXp      Int      @default(0)
+  tierSize     Int      @default(1000)
+  maxTier      Int      @default(50)
+  premiumPrice Int      @default(950)
+  active       Boolean  @default(true)
+  /**
+   * SEC11-META prompt 89 — explicit season window. Optional: when null the
+   * rollover logic falls back to the legacy 30-day age heuristic in
+   * BattlePassSeasons.rotateSeasonIfNeeded. When set, the seasonal-rollover
+   * module treats `endsAt` as authoritative (idempotent activation of the
+   * next season once `now > endsAt`).
+   */
+  startsAt     DateTime? @map("starts_at")
+  endsAt       DateTime? @map("ends_at")
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+
+  tiers    BattlePassTier[]
+  progress PlayerBattlePass[]
+
+  @@map("battle_pass_seasons")
+}
+
+enum RewardType {
+  CREDITS
+  WEAPON
+  SKIN
+  ATTACHMENT
+}
+
+model BattlePassTier {
+  id           String      @id @default(uuid())
+  seasonId     String      @map("season_id")
+  tier         Int
+  rewardType   RewardType
+  rewardSlug   String      @map("reward_slug")
+  rewardAmount Int         @default(1)
+  isPremium    Boolean     @default(false)
+  createdAt    DateTime    @default(now())
+  updatedAt    DateTime    @updatedAt
+
+  season BattlePassSeason @relation(fields: [seasonId], references: [id], onDelete: Cascade)
+
+  @@unique([seasonId, tier, isPremium])
+  @@index([seasonId])
+  @@map("battle_pass_tiers")
+}
+
+model PlayerBattlePass {
+  id           String            @id @default(uuid())
+  playerId     String            @map("player_id")
+  seasonId     String            @map("season_id")
+  xp           Int               @default(0)
+  premium      Boolean           @default(false)
+  claimedTiers String            @default("[]")
+  status       BattlePassStatus  @default(ACTIVE)
+  createdAt    DateTime          @default(now())
+  updatedAt    DateTime          @updatedAt
+
+  player Player           @relation(fields: [playerId], references: [id], onDelete: Cascade)
+  season BattlePassSeason @relation(fields: [seasonId], references: [id], onDelete: Cascade)
+
+  @@unique([playerId, seasonId])
+  @@index([playerId])
+  @@map("player_battle_pass")
+}
+
+model MatchEarning {
+  id        String   @id @default(uuid())
+  playerId  String   @map("player_id")
+  credits   Int
+  xp        Int
+  kills     Int
+  wave      Int
+  result    String
+  createdAt DateTime @default(now())
+
+  player Player @relation(fields: [playerId], references: [id], onDelete: Cascade)
+
+  @@index([playerId])
+  @@map("match_earnings")
+}
+
+// --- Project Reality: ballistics, medical, supply (realism features) ---
+
+// R3.1 — Material penetration lookup table
+model BallisticsMaterial {
+  id          String   @id @default(uuid())
+  slug        String   @unique
+  name        String
+  density     Float
+  thickness   Float    @default(0.1)
+  penetration Float
+  bulletStop  Boolean  @default(false)
+  color       String   @default("#888888")
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  @@map("ballistics_materials")
+}
+
+// R4.1 — Three-resource logistics economy
+model SupplyTransaction {
+  id        String   @id @default(uuid())
+  playerId  String   @map("player_id")
+  type      String
+  resource  String
+  amount    Int
+  note      String   @default("")
+  createdAt DateTime @default(now())
+
+  player Player @relation(fields: [playerId], references: [id], onDelete: Cascade)
+
+  @@index([playerId])
+  @@map("supply_transactions")
+}
+
+// R3.3 — Casualty states
+enum CasualtyState {
+  ACTIVE
+  BLEEDING
+  FRACTURED
+  UNCONSCIOUS
+}
+
+enum MedicalItemType {
+  BANDAGE
+  SPLINT
+  EPINEPHRINE
+  MEDKIT
+}
+
+model PlayerMedicalState {
+  id               String        @id @default(uuid())
+  playerId         String        @unique @map("player_id")
+  state            CasualtyState @default(ACTIVE)
+  bleedRate        Float         @default(0)
+  fractureLimb     String        @default("")
+  unconsciousUntil DateTime?
+  /**
+   * Task-1 (SEC): AES-256-GCM-encrypted PII-adjacent notes for the player's
+   * medical / accessibility profile (e.g. seizure-trigger warnings, motion-
+   * sickness accommodations the player disclosed to support). Encrypted at
+   * rest via `src/lib/security/encryption.ts` using `FIELD_ENC_KEY`. Null
+   * when the player has not provided any notes.
+   */
+  notesEncrypted   String?       @map("notes_encrypted")
+  createdAt        DateTime      @default(now())
+  updatedAt        DateTime      @updatedAt
+
+  player Player @relation(fields: [playerId], references: [id], onDelete: Cascade)
+
+  @@map("player_medical_states")
+}
+
+model MedicalItem {
+  id          String           @id @default(uuid())
+  slug        String           @unique
+  name        String
+  type        MedicalItemType
+  price       Int              @default(0)
+  healAmount  Int              @default(0)
+  useTime     Int              @default(3000)
+  description String           @default("")
+  createdAt   DateTime         @default(now())
+  updatedAt   DateTime         @updatedAt
+
+  @@map("medical_items")
+}
+
+model PlayerMedicalInventory {
+  id        String   @id @default(uuid())
+  playerId  String   @map("player_id")
+  itemSlug  String   @map("item_slug")
+  quantity  Int      @default(0)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  player Player @relation(fields: [playerId], references: [id], onDelete: Cascade)
+
+  @@unique([playerId, itemSlug])
+  @@index([playerId])
+  @@map("player_medical_inventory")
+}
+
+// --- P5.4: Daily & Weekly Challenges ---
+
+enum ChallengeCadence {
+  DAILY
+  WEEKLY
+}
+
+enum ChallengeType {
+  KILLS
+  HEADSHOTS
+  WAVES
+  MATCHES
+  MELEE
+}
+
+model PlayerChallenge {
+  id           String            @id @default(uuid())
+  playerId     String            @map("player_id")
+  type         ChallengeType
+  cadence      ChallengeCadence
+  target       Int
+  progress     Int               @default(0)
+  completed    Boolean           @default(false)
+  claimed      Boolean           @default(false)
+  rewardCredits Int              @default(0)
+  rewardXp     Int               @default(0)
+  description  String            @default("")
+  resetsAt     DateTime          @map("resets_at")
+  createdAt    DateTime          @default(now())
+  updatedAt    DateTime          @updatedAt
+
+  player Player @relation(fields: [playerId], references: [id], onDelete: Cascade)
+
+  @@index([playerId, cadence])
+  @@index([resetsAt])
+  @@map("player_challenges")
+}
+
+// --- Phase 1: Deterministic replay capture ---
+
+model Replay {
+  id          String   @id @default(uuid())
+  playerId    String   @map("player_id")
+  matchId     String   @map("match_id")
+  seed        Int
+  mode        String   @default("SURVIVAL")
+  loadoutSlug String   @map("loadout_slug")
+  result      String   @default("DEFEAT")
+  finalScore  Int      @default(0) @map("final_score")
+  finalKills  Int      @default(0) @map("final_kills")
+  durationMs  Int      @default(0) @map("duration_ms")
+  frameCount  Int      @default(0) @map("frame_count")
+  /** Serialized replay data (JSON). Stored as text for SQLite compat. */
+  replayData  String   @map("replay_data")
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  player Player @relation(fields: [playerId], references: [id], onDelete: Cascade)
+
+  @@index([playerId, createdAt])
+  @@index([mode])
+  @@map("replays")
+}
+
+// --- Phase 4: Sentient NPC foundation ---
+
+model NpcCharacter {
+  id            String   @id @default(uuid())
+  name          String
+  faction       String   @default("enemy")
+  backstory     String   @default("")
+  personality   String   @default("")
+  voiceProfile  String   @default("default") @map("voice_profile")
+  tier          String   @default("crowd") // hero | secondary | crowd
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
+
+  memories      NpcMemory[]
+  dialogues     DialogueLog[]
+
+  @@index([faction, tier])
+  @@map("npc_characters")
+}
+
+model NpcMemory {
+  id          String   @id @default(uuid())
+  npcId       String   @map("npc_id")
+  playerId    String   @map("player_id")
+  type        String   @default("observation") // observation | reflection | plan | relationship
+  content     String
+  importance  Float    @default(0.5)
+  embedding   String?  @map("embedding") // JSON array, null until Qdrant integration
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  npc    NpcCharacter @relation(fields: [npcId], references: [id], onDelete: Cascade)
+  player Player        @relation(fields: [playerId], references: [id], onDelete: Cascade)
+
+  @@index([npcId, playerId])
+  @@index([playerId])
+  @@map("npc_memories")
+}
+
+model DialogueLog {
+  id          String   @id @default(uuid())
+  npcId       String   @map("npc_id")
+  playerId    String   @map("player_id")
+  role        String   // user | assistant | system
+  content     String
+  emotion     String   @default("neutral")
+  backend     String   @default("mock") // cloud | browser | mock
+  latencyMs   Int      @default(0) @map("latency_ms")
+  matchId     String?  @map("match_id")
+  createdAt   DateTime @default(now())
+
+  npc    NpcCharacter @relation(fields: [npcId], references: [id], onDelete: Cascade)
+  player Player        @relation(fields: [playerId], references: [id], onDelete: Cascade)
+
+  @@index([npcId, playerId, createdAt])
+  @@index([playerId])
+  @@map("dialogue_logs")
+}
+
+// =====================================================================
+// AAA roadmap — Section 1 + Section 11 models
+// =====================================================================
+
+/**
+ * PlayerEvent — durable analytics event store (prompt 4).
+ * Every client track() call lands here via /api/telemetry/events.
+ * Enables funnel analysis (menu→match→purchase) without a third party.
+ */
+model PlayerEvent {
+  id        String   @id @default(uuid())
+  playerId  String?  @map("player_id")
+  sessionId String   @map("session_id")
+  name      String
+  props     String   @default("{}") // JSON-encoded props
+  at        DateTime @default(now())
+
+  @@index([name, at])
+  @@index([playerId, at])
+  @@index([sessionId])
+  @@map("player_events")
+}
+
+/**
+ * CrashReport — durable crash ingest (prompt 3).
+ * The /api/telemetry/errors route writes here when no Sentry DSN is set.
+ */
+model CrashReport {
+  id        String   @id @default(uuid())
+  sessionId String   @map("session_id")
+  message   String
+  stack     String?
+  severity  String   @default("error")
+  tags      String   @default("{}") // JSON
+  breadcrumbs String @default("[]") // JSON
+  url       String?
+  buildId   String?  @map("build_id")
+  resolved  Boolean  @default(false)
+  at        DateTime @default(now())
+
+  @@index([severity, resolved, at])
+  @@index([sessionId])
+  @@map("crash_reports")
+}
+
+/**
+ * FeatureFlag — runtime experiment toggles (prompt 90).
+ * Supports on/off flags AND A/B cohort assignment (cohort field).
+ */
+model FeatureFlag {
+  id          String   @id @default(uuid())
+  key         String   @unique
+  enabled     Boolean  @default(true)
+  /** "on/off" | "ab" — ab rolls players into cohort A or B. */
+  kind        String   @default("toggle")
+  /** 0..1 — fraction of players in cohort B (only used when kind=ab). */
+  rollout     Float    @default(0.5)
+  description String   @default("")
+  updatedAt   DateTime @updatedAt
+  createdAt   DateTime @default(now())
+
+  @@map("feature_flags")
+}
+
+/**
+ * Clan — social grouping (prompt 92).
+ */
+model Clan {
+  id          String   @id @default(uuid())
+  tag         String   @unique
+  name        String
+  level       Int      @default(1)
+  xp          Int      @default(0)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+  members     ClanMember[]
+
+  @@map("clans")
+}
+
+model ClanMember {
+  id        String   @id @default(uuid())
+  clanId    String   @map("clan_id")
+  playerId  String   @unique @map("player_id")
+  role      String   @default("member") // leader | officer | member
+  joinedAt  DateTime @default(now())
+
+  clan    Clan   @relation(fields: [clanId], references: [id], onDelete: Cascade)
+
+  @@map("clan_members")
+}
+
+// =====================================================================
+// SEC11-META — live-ops, currency hardening, A/B testing, retention
+// =====================================================================
+
+/**
+ * ScheduledEvent — live-ops calendar entries (prompt 88).
+ *
+ * Lets the live-ops team schedule battle pass seasons, challenge weeks,
+ * shop rotations, double-XP weekends, etc. without a code deploy.
+ * Non-player-facing: surfaced via /api/admin/calendar only.
+ *
+ * `kind` values: "season" | "challenge_reset" | "shop_rotation" |
+ * "double_xp" | "feature_flag" | "event" (free-form).
+ * `status` values: "scheduled" | "active" | "ended" | "cancelled".
+ *
+ * `payload` is a JSON string with kind-specific fields (e.g. seasonId,
+ * rotationSlug, flagKey). Routes resolve it lazily.
+ */
+model ScheduledEvent {
+  id          String   @id @default(uuid())
+  /** Stable slug for idempotent scheduling (same slug = same event). */
+  slug        String   @unique
+  kind        String
+  title       String
+  description String   @default("")
+  startsAt    DateTime @map("starts_at")
+  endsAt      DateTime @map("ends_at")
+  status      String   @default("scheduled")
+  /** JSON-encoded, kind-specific config. */
+  payload     String   @default("{}")
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  @@index([kind, status, startsAt])
+  @@index([endsAt])
+  @@map("scheduled_events")
+}
+
+/**
+ * ExperimentExposure — durable record of which cohort a player saw (prompt 90).
+ *
+ * The first time `recordExperimentExposure(flagKey, playerId)` is called
+ * for a given (flagKey, playerId), a row is inserted. Subsequent calls are
+ * no-ops (the cohort is sticky for the experiment lifetime). This makes
+ * funnel analysis + guardrail-metric computation possible from the DB
+ * alone (no third-party provider required).
+ */
+model ExperimentExposure {
+  id        String   @id @default(uuid())
+  flagKey   String   @map("flag_key")
+  playerId  String   @map("player_id")
+  cohort    String   // "A" | "B" (extension point for multi-arm)
+  variant   String   @default("") // human-readable variant name
+  at        DateTime @default(now())
+
+  @@unique([flagKey, playerId])
+  @@index([flagKey, cohort])
+  @@map("experiment_exposures")
+}
+
+/**
+ * CurrencyReceipt — signed receipts for every credit-debiting action (prompt 86).
+ *
+ * Every successful shop/buy, battlepass/premium, pack/open, or admin
+ * adjustment writes exactly one row. The `signature` is an HMAC-SHA256
+ * over `{playerId, amount, balanceAfter, reason, nonce, ts}` using the
+ * server-side RECEIPT_SECRET (env var, falls back to a dev key). This is
+ * the auditable trail a live-ops/support team needs to investigate
+ * "where did my credits go" tickets + the cryptographic proof a payment
+ * platform requires for chargeback disputes.
+ */
+model CurrencyReceipt {
+  id            String   @id @default(uuid())
+  playerId      String   @map("player_id")
+  /** "shop_buy" | "battlepass_premium" | "pack_open" | "admin_debit" | "refund". */
+  reason        String
+  /** Item slug or empty for generic debit. */
+  itemSlug      String   @default("") @map("item_slug")
+  amount        Int
+  balanceBefore Int      @map("balance_before")
+  balanceAfter  Int      @map("balance_after")
+  nonce         String
+  signature     String
+  ts            DateTime @default(now())
+
+  @@index([playerId, ts])
+  @@index([reason, ts])
+  @@map("currency_receipts")
+}
+
+/**
+ * LootBoxRoll — pack-open audit log (prompt 87).
+ *
+ * One row per pack open. Stores the pack slug, the rolled item kind/slug,
+ * the server-side seed used (so the roll is reproducible for dispute
+ * resolution), + the rarity. Paired with the /api/packs/odds disclosure,
+ * this gives the auditable trail regulators in some jurisdictions require
+ * (e.g. Belgian Gaming Commission, China MIIT loot-box disclosure rules).
+ */
+model LootBoxRoll {
+  id        String   @id @default(uuid())
+  playerId  String?  @map("player_id")
+  packSlug  String   @map("pack_slug")
+  itemKind  String   @map("item_kind") // wrap | charm | finisher
+  itemSlug  String   @map("item_slug")
+  rarity    String
+  /** Server-side seed (hex) used for this roll. */
+  seed      String
+  at        DateTime @default(now())
+
+  @@index([packSlug, at])
+  @@index([playerId, at])
+  @@map("loot_box_rolls")
+}
+
+/**
+ * ClanContribution — clan XP history (prompt 92).
+ *
+ * Every XP grant to a clan is logged so the live-ops team can audit clan
+ * progression + detect farm/exploit patterns. `source` is one of
+ * "match" | "clan_war" | "donation" | "admin".
+ */
+model ClanContribution {
+  id        String   @id @default(uuid())
+  clanId    String   @map("clan_id")
+  playerId  String?  @map("player_id")
+  source    String
+  amount    Int
+  note      String   @default("")
+  at        DateTime @default(now())
+
+  @@index([clanId, at])
+  @@index([playerId, at])
+  @@map("clan_contributions")
+}
+
+/**
+ * PlayerSession — coarse session boundaries for retention analytics (prompt 91).
+ *
+ * Each row is one play session (started by a `session_start` event + closed
+ * by either an explicit `session_end` event or an inactivity timeout
+ * computed from PlayerEvent rows). The retention dashboard reads this
+ * table directly; the rolling-up logic in retention.ts backfills rows
+ * when missing by scanning PlayerEvent.
+ */
+model PlayerSession {
+  id           String   @id @default(uuid())
+  playerId     String?  @map("player_id")
+  sessionId    String   @map("session_id")
+  startedAt    DateTime @default(now()) @map("started_at")
+  endedAt      DateTime? @map("ended_at")
+  durationMs   Int      @default(0) @map("duration_ms")
+  screenViews  Int      @default(0) @map("screen_views")
+  /**
+   * Task-1 (SEC): AES-256-GCM-encrypted client IP (for abuse triage only).
+   * Encrypted at rest via `src/lib/security/encryption.ts` with
+   * `FIELD_ENC_KEY`. Null when no IP was captured. Kept encrypted so a
+   * DB-dump leak does not reveal end-user IP addresses.
+   */
+  ipEncrypted  String?  @map("ip_encrypted")
+  createdAt    DateTime @default(now())
+
+  @@index([playerId, startedAt])
+  @@index([sessionId])
+  @@map("player_sessions")
+}
+
+// =====================================================================
+// SEC12-PLATFORM — bug reports, support tickets, patch-notes pipeline
+// =====================================================================
+
+/**
+ * BugReport — in-game bug-report ingest (prompt 100).
+ *
+ * The player submits from the in-game support menu. The route
+ * /api/support/bug-report auto-attaches the current breadcrumb ring
+ * (last 64 entries from errorTracking.ts) + an optional replay snippet
+ * (truncated to 16KB so it fits in a SQLite TEXT column).
+ *
+ * `status` values: "open" | "triaging" | "in_progress" | "resolved".
+ * `resolution` is free-form text set when status flips to "resolved"
+ * (e.g. "fixed: patched in v0.2.1" or "wontfix: by design").
+ *
+ * `breadcrumbs` + `hardware` are JSON strings (SQLite has no native
+ * JSON type). `replaySnippet` is a base64-encoded replay frame buffer
+ * (optional — null when the player opted out).
+ */
+model BugReport {
+  id             String   @id @default(uuid())
+  playerId       String   @map("player_id")
+  category       String // crash | graphical | audio | input | gameplay | performance | ui | network | other
+  severity       String   @default("medium") // low | medium | high | blocker
+  description    String
+  screenshotUrl  String?  @map("screenshot_url")
+  replaySnippet  String?  @map("replay_snippet")
+  breadcrumbs    String   @default("[]") // JSON
+  hardware       String   @default("{}") // JSON
+  buildId        String?  @map("build_id")
+  sessionId      String?  @map("session_id")
+  status         String   @default("open")
+  resolution     String?
+  createdAt      DateTime @default(now()) @map("created_at")
+  updatedAt      DateTime @updatedAt @map("updated_at")
+
+  @@index([status, severity, createdAt])
+  @@index([playerId, createdAt])
+  @@index([category, createdAt])
+  @@map("bug_reports")
+}
+
+/**
+ * SupportTicket — support ticket flow (prompt 100).
+ *
+ * Players submit tickets from the in-game support menu (billing,
+ * account, bug, feedback, question, other). The support team triages
+ * from the admin dashboard (status + assignedTo + responseHistory).
+ *
+ * `status` values: "open" | "in_progress" | "waiting_on_player" |
+ * "resolved" | "closed".
+ * `responseHistory` is a JSON array of `{ at, from, message }` entries
+ * (from = "player" | "support") so the full conversation is auditable
+ * in one row.
+ *
+ * `bugReportId` is optional — when a ticket escalates a bug report,
+ * the support team links the two for cross-reference.
+ */
+model SupportTicket {
+  id             String   @id @default(uuid())
+  playerId       String   @map("player_id")
+  category       String // billing | account | bug | feedback | question | other
+  subject        String
+  description    String
+  priority       Int      @default(3) // 1..5 (1 = urgent, 5 = low)
+  status         String   @default("open")
+  bugReportId    String?  @map("bug_report_id")
+  assignedTo     String?  @map("assigned_to")
+  responseHistory String  @default("[]") @map("response_history") // JSON
+  createdAt      DateTime @default(now()) @map("created_at")
+  updatedAt      DateTime @updatedAt @map("updated_at")
+
+  @@index([status, priority, createdAt])
+  @@index([playerId, createdAt])
+  @@index([assignedTo, status])
+  @@index([category, createdAt])
+  @@map("support_tickets")
+}
+
+// =====================================================================
+// Task-1 (SEC) — security + anti-cheat primitives
+// =====================================================================
+
+/**
+ * AuditLog — one row per admin API call. Written by `src/lib/security/audit-log.ts`
+ * from every `/api/admin/*` handler (security-audit, dashboard, experiments,
+ * rollover, backend-health, calendar, crash-free). The actor is the
+ * authenticated admin identifier (the shared-secret key id, or a future
+ * IdP subject). `payloadJson` is the redacted request body (PII stripped).
+ */
+model AuditLog {
+  id          String   @id @default(uuid())
+  /** Admin actor: "shared-secret" for the current model, or a future IdP subject. */
+  actor       String   @default("shared-secret")
+  route       String
+  method      String
+  ip          String   @default("")
+  status      Int      @default(0)
+  payloadJson String   @default("{}") @map("payload_json")
+  createdAt   DateTime @default(now()) @map("created_at")
+
+  @@index([actor, createdAt])
+  @@index([route, createdAt])
+  @@map("audit_logs")
+}
+
+/**
+ * UsedNonce — replay-attack protection for the purchase/receipt flow.
+ *
+ * Every signed purchase response includes a server-generated random nonce.
+ * The client MUST echo it back on any subsequent request that depends on
+ * the receipt being unspent (e.g. claiming a refund, replaying a roll for
+ * dispute resolution). `src/lib/security/nonce.ts` checks + inserts this
+ * row atomically; if a nonce is already present, the request is rejected
+ * as a replay. Rows TTL out after `expiresAt` (default 24h) and are
+ * periodically pruned.
+ */
+model UsedNonce {
+  nonce      String   @id
+  /** What flow the nonce was issued for: "purchase" | "pack_open" | "hit_claim". */
+  flow       String   @default("purchase")
+  playerId   String?  @map("player_id")
+  createdAt  DateTime @default(now()) @map("created_at")
+  expiresAt  DateTime @map("expires_at")
+
+  @@index([expiresAt])
+  @@index([flow, createdAt])
+  @@map("used_nonces")
+}
+
+/**
+ * CheatFlag — anti-cheat telemetry findings written by
+ * `src/lib/security/anti-cheat.ts`. One row per flagged anomaly (impossible
+ * fire rate, headshot ratio > 0.9 over 20 kills, etc.) over a sliding
+ * window of `PlayerEvent` rows. Surfaces in the admin dashboard so the
+ * support team can investigate + suspend players.
+ */
+model CheatFlag {
+  id          String   @id @default(uuid())
+  playerId    String   @map("player_id")
+  /** "impossible_fire_rate" | "impossible_headshot_ratio" | "impossible_range" | "other". */
+  kind        String
+  /** Numeric severity 0..100 — used to sort the admin queue. */
+  severity    Int      @default(50)
+  /** Human-readable summary the admin sees (sanitized). */
+  summary     String   @default("")
+  /** JSON-encoded evidence: window, samples, threshold, observed value. */
+  evidence    String   @default("{}")
+  /** "open" | "investigating" | "resolved" | "false_positive". */
+  status      String   @default("open")
+  createdAt   DateTime @default(now()) @map("created_at")
+  updatedAt   DateTime @updatedAt @map("updated_at")
+
+  @@index([playerId, createdAt])
+  @@index([status, severity, createdAt])
+  @@index([kind, createdAt])
+  @@map("cheat_flags")
+}

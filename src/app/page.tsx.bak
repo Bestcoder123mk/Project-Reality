@@ -1,0 +1,85 @@
+"use client";
+
+import { useEffect } from "react";
+import dynamic from "next/dynamic";
+import { useGameStore } from "@/lib/game/store";
+import { useProfile } from "@/lib/game/useProfile";
+import { MainMenu } from "@/components/menu/MainMenu";
+import { LoadoutPicker } from "@/components/menu/LoadoutPicker";
+import { MapSelection } from "@/components/menu/MapSelection";
+import { SettingsPanel } from "@/components/menu/SettingsPanel";
+import { GunsmithScreen } from "@/components/menu/GunsmithScreen";
+import { ShopScreen } from "@/components/menu/ShopScreen";
+import { PackScreen } from "@/components/menu/PackScreen";
+import { BattlePassScreen } from "@/components/menu/BattlePassScreen";
+import { TutorialScreen } from "@/components/menu/TutorialScreen";
+import { OperatorScreen } from "@/components/menu/OperatorScreen";
+import { GameErrorBoundary } from "@/components/game/GameErrorBoundary";
+import { PerfOverlay } from "@/components/game/PerfOverlay";
+import { initErrorTracking } from "@/lib/errorTracking";
+import { initAnalytics, track } from "@/lib/analytics";
+
+// Backlog #61 / #54 — lazy-load the heavy GameEngine (and the entire
+// Three.js system graph behind it) into a separate chunk. The menu
+// compiles + hydrates with static imports (the original pattern); only
+// the GameCanvas (which pulls in the 87k LOC engine) is dynamic. This
+// avoids the "BAILOUT_TO_CLIENT_SIDE_RENDERING" hydration stall that
+// happens when the menu itself is dynamic-imported with ssr:false.
+const GameCanvas = dynamic(
+  () => import("@/components/game/GameCanvas").then((m) => m.GameCanvas),
+  {
+    ssr: false,
+    loading: () => (
+      <div className="absolute inset-0 grid place-items-center bg-black text-white/60 text-xs">
+        Loading engine…
+      </div>
+    ),
+  }
+);
+
+export default function Home() {
+  const phase = useGameStore((s) => s.phase);
+  const { refresh } = useProfile();
+
+  // One-time init: crash reporting + analytics (prompt 3 + prompt 4).
+  useEffect(() => {
+    initErrorTracking();
+    initAnalytics();
+  }, []);
+
+  useEffect(() => {
+    refresh();
+  }, [refresh]);
+
+  useEffect(() => {
+    if (phase === "menu") refresh();
+    track("screen_view", { phase });
+  }, [phase, refresh]);
+
+  return (
+    <main className="relative h-screen w-screen overflow-hidden bg-black text-white">
+      {phase === "menu" && <MainMenu />}
+      {phase === "loadout" && <LoadoutPicker />}
+      {phase === "mapselect" && <MapSelection />}
+      {phase === "operator" && <OperatorScreen />}
+
+      {phase === "gunsmith" && <GunsmithScreen />}
+      {phase === "shop" && <ShopScreen />}
+      {phase === "packs" && <PackScreen onClose={() => useGameStore.getState().setPhase("shop")} />}
+      {phase === "battlepass" && <BattlePassScreen />}
+      {phase === "tutorial" && <TutorialScreen />}
+
+      <SettingsPanel />
+
+      {/* Crash reporting (prompt 3): a WebGL/runtime crash reports the
+          stack instead of white-screening. */}
+      <GameErrorBoundary label="game">
+        <GameCanvas />
+      </GameErrorBoundary>
+
+      {/* Dev-only perf budget dashboard (prompt 7). Hidden unless
+          ?perf=1 or localStorage pr_perf_overlay=1. */}
+      <PerfOverlay />
+    </main>
+  );
+}
