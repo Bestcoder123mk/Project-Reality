@@ -21,7 +21,7 @@
  */
 
 import {
-  initializeRemoteConfig,
+  getRemoteConfig,
   fetchConfig,
   getValue,
   getAll,
@@ -78,7 +78,7 @@ export function initRemoteConfig(): FirebaseRemoteConfig | null {
   if (!app) return null;
 
   try {
-    _rc = initializeRemoteConfig(app);
+    _rc = getRemoteConfig(app);
     _rc.settings.minimumFetchIntervalMillis =
       process.env.NODE_ENV === "production" ? 3_600_000 : 5_000;
     _rc.defaultConfig = { ...REMOTE_CONFIG_DEFAULTS };
