@@ -49,6 +49,18 @@ import { track } from "../../analytics";
  * the original design intent.
  */
 async function getDb(): Promise<typeof import("@/lib/api")["db"]> {
+  // Fail immediately and predictably in the browser — don't rely on the
+  // dynamic import itself throwing the way we expect. Every call site
+  // already wraps this in try/catch + falls back to localStorage, so a
+  // clean synchronous-ish rejection here is exactly what they want, and
+  // it avoids depending on Prisma's browser-stub behavior (which is what
+  // caused today's crash — the fallback we thought we had wasn't firing
+  // the way this comment assumed).
+  if (typeof window !== "undefined") {
+    throw new Error(
+      "[platform-integration] Prisma access is server-only; refusing to import it in the browser."
+    );
+  }
   const { db } = await import("@/lib/api");
   return db;
 }
