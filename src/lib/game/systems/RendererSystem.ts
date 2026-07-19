@@ -761,28 +761,31 @@ export class RendererSystem implements GameSystem {
     const colors = skyColors(tod);
     if (skyMesh) {
       const mat = skyMesh.material as THREE.ShaderMaterial;
-      // Task-3 — Weather wetness (Prompt #9): darken the sky toward 0x333842
-      // when wet. Wet weather reads visually "gloomy" — the sky desaturates
-      // + darkens. Lerp by wetness² so light rain (wetness=0.3) produces a
-      // visible gloom shift (wetBias=0.09 → 9% toward gloom) without
-      // crushing the day/night sky color. The target 0x333842 = (0.2, 0.22,
-      // 0.26) is a muted blue-gray typical of overcast rainy weather.
-      const wetBias = weather.wetness * weather.wetness;
-      const gloomR = 0.2, gloomG = 0.22, gloomB = 0.26;
-      const topR = colors.top[0] * (1 - wetBias) + gloomR * wetBias;
-      const topG = colors.top[1] * (1 - wetBias) + gloomG * wetBias;
-      const topB = colors.top[2] * (1 - wetBias) + gloomB * wetBias;
-      const midR = colors.mid[0] * (1 - wetBias) + gloomR * wetBias;
-      const midG = colors.mid[1] * (1 - wetBias) + gloomG * wetBias;
-      const midB = colors.mid[2] * (1 - wetBias) + gloomB * wetBias;
-      const botR = colors.bottom[0] * (1 - wetBias) + gloomR * wetBias;
-      const botG = colors.bottom[1] * (1 - wetBias) + gloomG * wetBias;
-      const botB = colors.bottom[2] * (1 - wetBias) + gloomB * wetBias;
-      (mat.uniforms.topColor.value as THREE.Color).setRGB(topR, topG, topB);
-      (mat.uniforms.midColor.value as THREE.Color).setRGB(midR, midG, midB);
-      (mat.uniforms.bottomColor.value as THREE.Color).setRGB(botR, botG, botB);
+      // buildSky() has two possible shaders: the primary one (SkyShader from
+      // rendering2/daynight.ts) uses uSunDirection/uSunColor/uZenithColor/
+      // uHorizonColor/uTime; only the fallback (used if the primary shader's
+      // construction throws) has topColor/midColor/bottomColor. The primary
+      // shader construction doesn't actually throw, so this block was always
+      // running against a material that didn't have these uniforms — this
+      // guard prevents that crash. Weather-reactive gloom tinting simply
+      // doesn't apply to the atmospheric SkyShader for now.
+      if (mat.uniforms.topColor && mat.uniforms.midColor && mat.uniforms.bottomColor) {
+        const wetBias = weather.wetness * weather.wetness;
+        const gloomR = 0.2, gloomG = 0.22, gloomB = 0.26;
+        const topR = colors.top[0] * (1 - wetBias) + gloomR * wetBias;
+        const topG = colors.top[1] * (1 - wetBias) + gloomG * wetBias;
+        const topB = colors.top[2] * (1 - wetBias) + gloomB * wetBias;
+        const midR = colors.mid[0] * (1 - wetBias) + gloomR * wetBias;
+        const midG = colors.mid[1] * (1 - wetBias) + gloomG * wetBias;
+        const midB = colors.mid[2] * (1 - wetBias) + gloomB * wetBias;
+        const botR = colors.bottom[0] * (1 - wetBias) + gloomR * wetBias;
+        const botG = colors.bottom[1] * (1 - wetBias) + gloomG * wetBias;
+        const botB = colors.bottom[2] * (1 - wetBias) + gloomB * wetBias;
+        (mat.uniforms.topColor.value as THREE.Color).setRGB(topR, topG, topB);
+        (mat.uniforms.midColor.value as THREE.Color).setRGB(midR, midG, midB);
+        (mat.uniforms.bottomColor.value as THREE.Color).setRGB(botR, botG, botB);
+      }
     }
-
     const sd = sunDirection(tod);
     const sunDist = 100;
     const nightness = this.computeNightness(tod); // 0 day → 1 deep night
