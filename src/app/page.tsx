@@ -79,9 +79,9 @@ export default function Home() {
   const phase = useGameStore((s) => s.phase);
   const { refresh } = useProfile();
 
-const [authState, setAuthState] = useState
-    "loading" | "signed-out" | "signed-in"
-  >("loading");
+const [authState, setAuthState] = useState(
+    "loading" as "loading" | "signed-out" | "signed-in"
+  );
   const [, setAuthUser] = useState<FirebaseUser | null>(null);
 
   useEffect(() => {
