@@ -81,7 +81,7 @@ export default function Home() {
   //   - "loading"  — auth state not yet known (show nothing / spinner).
   //   - "signed-out" — show SignInScreen.
   //   - "signed-in"  — show the game (MainMenu + canvas).
-  const [authState, setAuthState] = useState<
+  const [authState, setAuthState] = useState
     "loading" | "signed-out" | "signed-in"
   >("loading");
   const [, setAuthUser] = useState<FirebaseUser | null>(null);
@@ -95,8 +95,27 @@ export default function Home() {
   // Subscribe to Firebase Auth state. The callback fires immediately
   // with the current user (null when signed out) + on every sign-in /
   // sign-out. The unsubscribe is cleaned up on unmount.
+  //
+  // Defensive timeout: onAuthStateChanged should fire almost instantly,
+  // but if Firebase Auth ever fails to initialize (blocked network,
+  // storage access denied, misconfiguration) the callback could be
+  // delayed indefinitely — falling back to "signed-out" after a few
+  // seconds means the player sees the sign-in screen instead of a
+  // permanent spinner.
   useEffect(() => {
+    let settled = false;
+    const timeout = setTimeout(() => {
+      if (!settled) {
+        console.warn(
+          "[auth] onAuthStateChanged did not fire within 8s — falling back to signed-out."
+        );
+        setAuthState("signed-out");
+      }
+    }, 8000);
+
     const unsub = onAuthChange((user) => {
+      settled = true;
+      clearTimeout(timeout);
       setAuthUser(user);
       setAuthState(user ? "signed-in" : "signed-out");
       if (user) {
@@ -110,7 +129,10 @@ export default function Home() {
         track("session_start");
       }
     });
-    return () => unsub();
+    return () => {
+      clearTimeout(timeout);
+      unsub();
+    };
   }, []);
 
   useEffect(() => {
